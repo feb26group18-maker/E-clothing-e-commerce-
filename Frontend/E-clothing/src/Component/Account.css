@@ -1,0 +1,179 @@
+.account-page {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 15px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(135deg, #ff3f6c, #ff6f91);
+  color: white;
+  padding: 20px 25px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-pic {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: 3px solid white;
+  object-fit: cover;
+}
+
+.profile-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.profile-header p {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+/* Details Card */
+.details-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.details-card h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row span:first-child {
+  color: #666;
+  font-size: 14px;
+}
+
+.detail-row span:last-child {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+}
+
+/* Feature Cards */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card i {
+  font-size: 30px;
+  color: #ff3f6c;
+}
+
+.feature-card h3 {
+  margin: 10px 0 6px;
+  font-size: 15px;
+  color: #222;
+}
+
+.feature-card p {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+/* Buttons */
+.btn-section {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.dashboard-btn,
+.logout-btn {
+  border: none;
+  padding: 10px 22px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dashboard-btn {
+  background: #2874f0;
+  color: white;
+}
+
+.dashboard-btn:hover {
+  background: #1659c7;
+}
+
+.logout-btn {
+  background: #e53935;
+  color: white;
+}
+
+.logout-btn:hover {
+  background: #c62828;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .btn-section {
+    flex-direction: column;
+  }
+
+  .dashboard-btn,
+  .logout-btn {
+    width: 100%;
+  }
+}

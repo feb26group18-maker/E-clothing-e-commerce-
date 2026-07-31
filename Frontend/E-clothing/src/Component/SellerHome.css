@@ -1,0 +1,96 @@
+.seller-home{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+/*==========================
+WELCOME CARD
+==========================*/
+
+.seller-welcome-card{
+    background:#1e293b;
+    color:white;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.seller-welcome-card h2{
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.seller-welcome-card p{
+    opacity:.9;
+    font-size:15px;
+}
+
+.seller-name{
+    color:#fff7ed;
+}
+
+/*==========================
+STATS GRID
+==========================*/
+
+.seller-stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+/*==========================
+CARD
+==========================*/
+
+.seller-stat-card{
+    background:#fff;
+    padding:25px;
+    border-radius:16px;
+    text-align:center;
+    box-shadow:0 4px 12px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.seller-stat-card:hover{
+    transform:translateY(-5px);
+}
+
+.seller-stat-card h4{
+    color:#64748b;
+    margin-bottom:10px;
+    font-size:15px;
+    font-weight:500;
+}
+
+.seller-stat-card h2{
+    color:#2563eb;
+    font-size:32px;
+    font-weight:700;
+}
+
+/*==========================
+RESPONSIVE
+==========================*/
+
+@media(max-width:1200px){
+
+.seller-stats-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:768px){
+
+.seller-stats-grid{
+    grid-template-columns:1fr;
+}
+
+.seller-welcome-card h2{
+    font-size:22px;
+}
+
+}

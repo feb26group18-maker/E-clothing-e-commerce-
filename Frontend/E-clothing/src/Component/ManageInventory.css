@@ -1,0 +1,130 @@
+.inventory-page{
+    padding:25px;
+    background:#f6f7fb;
+    /* min-height:100vh; */
+}
+
+.inventory-card{
+    background:#fff;
+    border-radius:14px;
+    padding:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+    overflow-x:auto;
+}
+
+.inventory-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:900px;
+}
+
+.inventory-table thead{
+    background:#f8fafc;
+}
+
+.inventory-table th{
+    text-align:left;
+    padding:14px;
+    font-size:13px;
+    color:#475569;
+    font-weight:700;
+}
+
+.inventory-table td{
+    padding:14px;
+    border-bottom:1px solid #eef2f7;
+    font-size:13px;
+    color:#334155;
+}
+
+.inventory-table tbody tr:hover{
+    background:#f8fafc;
+}
+
+.product-cell{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:500;
+}
+
+.product-avatar{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#f97316,#fb923c);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    font-weight:bold;
+}
+
+.stock-badge{
+    padding:5px 10px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.stock-badge.in-stock{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.stock-badge.out-of-stock{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.stock-btn{
+    border:none;
+    padding:8px 14px;
+    border-radius:7px;
+    cursor:pointer;
+    color:#fff;
+    font-size:12px;
+    font-weight:600;
+    background:linear-gradient(135deg,#f97316,#fb923c);
+    transition:.25s;
+}
+
+.stock-btn:hover{
+    background:linear-gradient(135deg,#ea580c,#f97316);
+}
+
+.stock-btn:active{
+    transform:scale(.97);
+}
+
+.modal-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.stock-modal{
+    background:white;
+    width:350px;
+    padding:25px;
+    border-radius:10px;
+
+}
+.stock-modal input{
+    width:100%;
+    padding:10px;
+    margin:15px 0;
+}
+
+.modal-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+}

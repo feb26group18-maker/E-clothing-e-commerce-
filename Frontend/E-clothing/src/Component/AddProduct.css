@@ -1,0 +1,640 @@
+/* .add-product-page{
+
+padding:20px;
+
+}
+
+
+
+.add-product-card{
+
+background:white;
+
+border-radius:12px;
+
+padding:30px;
+
+box-shadow:0 4px 15px rgba(0,0,0,0.08);
+
+}
+
+
+
+.add-product-card h2{
+
+margin-bottom:25px;
+
+font-size:24px;
+
+color:#333;
+
+border-bottom:1px solid #eee;
+
+padding-bottom:15px;
+
+}
+
+
+
+
+
+.form-grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:20px;
+
+}
+
+
+
+.form-group{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+
+
+.form-group label{
+
+font-size:14px;
+
+font-weight:600;
+
+margin-bottom:8px;
+
+color:#444;
+
+}
+
+
+
+
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+
+
+padding:12px;
+
+border:1px solid #ddd;
+
+border-radius:8px;
+
+font-size:14px;
+
+outline:none;
+
+transition:.3s;
+
+}
+
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+
+border-color:#6c63ff;
+
+}
+
+
+
+
+
+.full{
+
+margin-top:20px;
+
+}
+
+
+
+
+
+textarea{
+
+resize:none;
+
+}
+
+
+
+
+
+.selected-images{
+
+
+margin-top:15px;
+
+display:flex;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+
+}
+
+
+
+.image-item{
+
+
+background:#f2f2f2;
+
+padding:10px 15px;
+
+border-radius:20px;
+
+font-size:13px;
+
+color:#333;
+
+
+}
+
+
+
+
+
+.submit-area{
+
+
+margin-top:30px;
+
+text-align:center;
+
+
+}
+
+
+
+.add-btn{
+
+
+background:#6c63ff;
+
+color:white;
+
+border:none;
+
+padding:13px 45px;
+
+border-radius:8px;
+
+font-size:16px;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:.3s;
+
+
+}
+
+
+
+.add-btn:hover{
+
+
+background:#5548e5;
+
+
+}
+
+
+
+
+
+@media(max-width:768px){
+
+
+.form-grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+} */
+
+
+.add-product-page{
+
+    padding:20px;
+
+}
+
+
+
+/* Card */
+
+.add-product-card{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:30px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+
+}
+
+
+
+.add-product-card h2{
+
+    margin-bottom:25px;
+
+    font-size:24px;
+
+    color:#333;
+
+    border-bottom:1px solid #eee;
+
+    padding-bottom:15px;
+
+}
+
+
+
+
+
+
+/* Form Grid */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+}
+
+
+
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+
+.form-group label{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+    color:#444;
+
+}
+
+
+
+
+
+
+/* Inputs */
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    outline:none;
+
+    transition:.3s;
+
+
+}
+
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+
+
+    border-color:#6c63ff;
+
+
+}
+
+
+
+
+
+
+textarea{
+
+    resize:none;
+
+}
+
+
+
+.full{
+
+    margin-top:20px;
+
+}
+
+
+
+
+
+
+/* Choose Image Button */
+
+
+.choose-image-btn{
+
+
+    width:180px;
+
+    padding:12px 20px;
+
+    background:#6c63ff;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    margin-top:5px;
+
+
+}
+
+
+
+.choose-image-btn:hover{
+
+
+    background:#5548e5;
+
+
+}
+
+
+
+
+
+
+
+/* Image Preview Container */
+
+
+.selected-images{
+
+
+    margin-top:20px;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+
+}
+
+
+
+
+
+
+/* Image Card */
+
+
+.image-preview-card{
+
+
+    width:170px;
+
+    background:#fafafa;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    padding:12px;
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+.image-preview-card img{
+
+
+    width:100%;
+
+    height:120px;
+
+    object-fit:cover;
+
+    border-radius:8px;
+
+
+}
+
+
+
+
+
+
+.image-preview-card p{
+
+
+    font-size:12px;
+
+    margin:10px 0;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    color:#444;
+
+
+}
+
+
+
+
+
+
+
+/* Remove Image Button */
+
+
+.remove-image-btn{
+
+
+    width:100%;
+
+    padding:8px;
+
+    background:#ff4d4d;
+
+    color:white;
+
+    border:none;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+
+}
+
+
+
+.remove-image-btn:hover{
+
+
+    background:#d93636;
+
+
+}
+
+
+
+
+
+
+
+
+/* Submit */
+
+
+.submit-area{
+
+
+    margin-top:30px;
+
+    text-align:center;
+
+
+}
+
+
+
+
+.add-btn{
+
+
+    background:#6c63ff;
+
+    color:white;
+
+    border:none;
+
+    padding:13px 45px;
+
+    border-radius:8px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s;
+
+
+}
+
+
+
+
+.add-btn:hover{
+
+
+    background:#5548e5;
+
+
+}
+
+
+
+
+
+
+
+
+/* Responsive */
+
+
+@media(max-width:768px){
+
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .add-product-card{
+
+        padding:20px;
+
+    }
+
+
+
+    .image-preview-card{
+
+        width:140px;
+
+    }
+
+
+
+}

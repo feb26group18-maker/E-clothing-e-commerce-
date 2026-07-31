@@ -1,0 +1,53 @@
+.account-container {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+
+  background: #fff;
+}
+
+.account-img {
+  width: 130px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.account-container h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #282c3f;
+  margin-bottom: 5px;
+}
+
+.account-container p {
+  font-size: 14px;
+  color: #94969f;
+  margin-bottom: 20px;
+}
+
+/* Pink outline button like Myntra */
+.account-btn {
+  padding: 12px 30px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  color: #ff3f6c;
+  background: transparent;
+
+  border: 1.5px solid #ff3f6c;
+  border-radius: 4px;
+
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.account-btn:hover {
+  background: #fff1f4;
+}

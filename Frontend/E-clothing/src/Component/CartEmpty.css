@@ -1,0 +1,52 @@
+.cart-container {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  background: #fff;
+}
+
+.cart-img {
+  width: 140px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.cart-container h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #282c3f;
+  margin: 5px 0;
+}
+
+.cart-container p {
+  font-size: 14px;
+  color: #94969f;
+  margin-bottom: 20px;
+}
+
+/* Myntra style button */
+.cart-btn {
+  padding: 12px 25px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  color: #ff3f6c;
+  background: transparent;
+
+  border: 1.5px solid #ff3f6c;
+  border-radius: 4px;
+
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.cart-btn:hover {
+  background: #fff1f4;
+}

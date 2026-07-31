@@ -1,0 +1,224 @@
+.order-details-page {
+    padding: 25px;
+    background: #f6f7fb;
+    /* min-height: 100vh; */
+}
+
+/* ===========================
+HEADER
+=========================== */
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.order-header h2 {
+    font-size: 28px;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.order-header p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.status {
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.pending {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+/* ===========================
+CARDS
+=========================== */
+
+.detail-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    border: 1px solid #edf2f7;
+}
+
+.detail-card h3 {
+    font-size: 18px;
+    color: #1e293b;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* ===========================
+DETAIL GRID
+=========================== */
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+}
+
+.detail-grid label {
+    display: block;
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 5px;
+}
+
+.detail-grid span {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/* ===========================
+ADDRESS
+=========================== */
+
+.detail-card p {
+    color: #475569;
+    line-height: 1.8;
+}
+
+/* ===========================
+TABLE
+=========================== */
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.product-table thead {
+    background: #fff7ed;
+}
+
+.product-table th {
+    padding: 14px;
+    font-size: 14px;
+    color: #475569;
+    text-align: left;
+}
+
+.product-table td {
+    padding: 15px;
+    border-bottom: 1px solid #edf2f7;
+    color: #334155;
+}
+
+.product-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.product-image {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid #e2e8f0;
+}
+
+.grand-total {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.grand-total span {
+    color: #ea580c;
+}
+
+/* ===========================
+PAYMENT STATUS
+=========================== */
+
+.paid-status {
+    color: #16a34a;
+    background: #dcfce7;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+/* ===========================
+BUTTONS
+=========================== */
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+}
+
+.back-btn,
+.update-btn {
+
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+
+}
+
+.back-btn {
+    background: #475569;
+    color: white;
+}
+
+.back-btn:hover {
+    background: #334155;
+}
+
+.update-btn {
+    background: linear-gradient(135deg,#f97316,#fb923c);
+    color: white;
+}
+
+.update-btn:hover {
+    background: linear-gradient(135deg,#ea580c,#f97316);
+}
+
+/* ===========================
+RESPONSIVE
+=========================== */
+
+@media(max-width:900px){
+
+.detail-grid{
+    grid-template-columns:1fr;
+}
+
+.product-table{
+    display:block;
+    overflow-x:auto;
+}
+
+.button-group{
+    flex-direction:column;
+    gap:15px;
+}
+
+.back-btn,
+.update-btn{
+    width:100%;
+}
+
+}

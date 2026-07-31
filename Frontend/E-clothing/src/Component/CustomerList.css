@@ -1,0 +1,147 @@
+.customer-page {
+  padding: 25px;
+  background: #f6f7fb;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.customer-header {
+  margin-bottom: 20px;
+}
+
+.customer-header h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.customer-header p {
+  color: #64748b;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* CARD */
+.customer-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* TABLE */
+.customer-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* HEADER */
+.customer-table thead {
+  background: #f8fafc;
+}
+
+.customer-table th {
+  text-align: left;
+  padding: 14px;
+  font-size: 13px;
+  color: #475569;
+  font-weight: 600;
+}
+
+/* ROW */
+.customer-table td {
+  padding: 14px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #334155;
+}
+
+/* ROW HOVER */
+.customer-table tbody tr {
+  transition: 0.2s;
+}
+
+.customer-table tbody tr:hover {
+  background: #f8fafc;
+  transform: scale(1.01);
+}
+
+/* ID */
+.id-cell {
+  font-weight: 600;
+  color: #64748b;
+}
+
+/* NAME WITH AVATAR */
+.name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #ff3f6c, #ff6f61);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* STATUS */
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status.active {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status.inactive {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* BUTTON BASE */
+.action-buttons button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* VIEW */
+.view-btn {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  color: white;
+}
+
+/* DELETE */
+.delete-btn {
+  background: linear-gradient(135deg, #475569, #64748b);
+  color: white;
+}
+
+/* BUTTON HOVER */
+.action-buttons button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}

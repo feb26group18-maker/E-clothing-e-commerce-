@@ -1,0 +1,153 @@
+.product-page{
+  padding:25px;
+  background:#f6f7fb;
+  /* min-height:100vh; */
+}
+
+.product-card{
+  background:#fff;
+  border-radius:14px;
+  padding:18px;
+  box-shadow:0 8px 20px rgba(0,0,0,.05);
+  overflow-x:auto;
+}
+
+.product-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:800px;
+}
+
+.product-table thead{
+  background:#f8fafc;
+}
+
+.product-table th{
+  text-align:left;
+  padding:14px;
+  font-size:13px;
+  font-weight:700;
+  color:#475569;
+}
+
+.product-table td{
+  padding:14px;
+  font-size:13px;
+  color:#334155;
+  border-bottom:1px solid #eef2f7;
+}
+
+.product-table tbody tr:hover{
+  background:#f8fafc;
+}
+
+.name-cell{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:500;
+}
+
+.avatar{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#f97316,#fb923c);
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:700;
+}
+
+.status-badge{
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.status-badge.approved{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.status-badge.pending{
+  background:#fff7ed;
+  color:#c2410c;
+}
+
+.status-badge.rejected{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.action-buttons{
+  display:flex;
+  gap:6px;
+}
+
+.action-buttons button{
+  border:none;
+  padding:4px 9px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:600;
+  color:#fff;
+  transition:.2s;
+}
+
+.view-btn{
+  background:linear-gradient(135deg,#3b82f6,#60a5fa);
+}
+
+.edit-btn{
+  background:linear-gradient(135deg,#f97316,#fb923c);
+  width: auto !important;
+  height: auto !important;
+
+}
+
+.delete-btn{
+  background:linear-gradient(135deg,#475569,#64748b);
+}
+
+.action-buttons button:hover{
+  opacity:.9;
+}
+
+.action-buttons button:active{
+  transform:scale(.96);
+}
+
+/* Toolbar */
+.product-toolbar{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  margin:18px 0;
+}
+
+/* Add Product Button */
+.add-product-btn{
+  background:linear-gradient(135deg,#f97316,#fb923c);
+  color:#fff;
+  border:none;
+  padding:10px 18px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .25s ease;
+  box-shadow:0 4px 12px rgba(249,115,22,.25);
+}
+
+.add-product-btn:hover{
+  background:linear-gradient(135deg,#ea580c,#f97316);
+  transform:translateY(-2px);
+}
+
+.add-product-btn:active{
+  transform:scale(.97);
+}

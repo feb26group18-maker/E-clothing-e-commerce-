@@ -1,0 +1,176 @@
+.product-page {
+  padding: 25px;
+  background: #f6f7fb;
+  /* min-height: 100vh; */
+}
+
+.product-card .action-buttons button.view-btn {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa) !important;
+  color: white !important;
+  width: auto !important;
+
+}
+
+.product-card .action-buttons button.approve-btn {
+  background: linear-gradient(135deg, #22c55e, #4ade80) !important;
+  color: white !important;
+  width: auto !important;
+
+}
+
+.product-card .action-buttons button.reject-btn {
+  background: linear-gradient(135deg, #f97316, #fb923c) !important;
+  color: white !important;
+  width: auto !important;
+}
+
+.product-card .action-buttons button.delete-btn {
+  background: linear-gradient(135deg, #475569, #64748b) !important;
+  color: white !important;
+  width: auto !important;
+
+}
+/* CARD */
+.product-card {
+  background: white;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  overflow-x: auto;
+}
+
+/* TABLE */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 750px;
+}
+
+/* HEADER */
+.product-table thead {
+  background: #f8fafc;
+}
+
+.product-table th {
+  text-align: left;
+  padding: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+}
+
+/* ROW */
+.product-table td {
+  padding: 14px;
+  font-size: 13px;
+  color: #334155;
+  border-bottom: 1px solid #eef2f7;
+}
+
+/* HOVER */
+.product-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* NAME CELL */
+.name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+/* AVATAR */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff3f6c, #ff6f61);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* STATUS BADGES */
+.status-badge {
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+}
+
+.status-badge.pending {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.status-badge.approved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-badge.rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* BASE BUTTON (FIXED SMALL SIZE LIKE CUSTOMER LIST) */
+.action-buttons button {
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 7px;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* VIEW */
+.view-btn {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  color: white;
+}
+
+/* APPROVE */
+.approve-btn {
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+  color: white;
+}
+
+/* REJECT */
+.reject-btn {
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  color: white;
+}
+
+/* DELETE */
+.delete-btn {
+  background: linear-gradient(135deg, #475569, #64748b);
+  color: white;
+}
+
+/* HOVER */
+.view-btn:hover,
+.approve-btn:hover,
+.reject-btn:hover,
+.delete-btn:hover {
+  opacity: 0.9;
+}
+
+/* CLICK */
+.action-buttons button:active {
+  transform: scale(0.96);
+}
