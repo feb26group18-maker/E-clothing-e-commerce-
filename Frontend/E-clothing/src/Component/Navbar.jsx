@@ -49,26 +49,17 @@ export default function Navbar() {
       </div>
 
       <div className="nav-categories">
-        <NavLink to="/user/men" className="nav-category">
+        <NavLink to="/men" className="nav-category">
           Men
         </NavLink>
 
-        <NavLink to="/user/women" className="nav-category">
+        <NavLink to="/women" className="nav-category">
           Women
         </NavLink>
 
-        <NavLink to="/user/kids" className="nav-category">
+        <NavLink to="/kids" className="nav-category">
           Kids
         </NavLink>
-      </div>
-
-      <div className="search-container">
-        <i className="bi bi-search search-icon"></i>
-        <input
-          type="text"
-          placeholder="Search products..."
-          className="search"
-        />
       </div>
 
       <div className="nav-right">

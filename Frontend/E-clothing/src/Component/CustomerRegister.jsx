@@ -56,7 +56,7 @@ function Register() {
       })
     };
 
-    fetch("http://localhost:8081/auth/register/customer", reqoptions)
+    fetch("http://localhost:8080/auth/register/customer", reqoptions)
       .then((resp) => {
         if (resp.ok) {
           return resp.text();
@@ -110,7 +110,7 @@ function Register() {
       })
     };
 
-    fetch("http://localhost:8081/auth/register/seller", reqoptions)
+    fetch("http://localhost:8080/auth/register/seller", reqoptions)
       .then((resp) => {
         if (resp.ok) {
           return resp.text();

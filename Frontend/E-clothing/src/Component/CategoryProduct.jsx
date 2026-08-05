@@ -252,6 +252,11 @@
 
 import { useEffect, useState } from "react";
 import "./CategoryProduct.css";
+import {
+    addToWishlist,
+    getWishlist,
+    removeFromWishlist
+} from "../services/wishlistService";
 
 import {
     getProductsByCategory,
@@ -272,6 +277,7 @@ export default function CategoryProduct({
     const [subCategories,setSubCategories] = useState([]);
 
     const [loading,setLoading] = useState(true);
+    const [wishlist, setWishlist] = useState([]);
 
     const [selectedSubCategory,setSelectedSubCategory] = useState(null);
 
@@ -288,8 +294,36 @@ export default function CategoryProduct({
         loadProducts();
 
         loadSubCategories();
-
+        loadWishlist();
     },[categoryId]);
+
+    const loadWishlist = async () => {
+
+    try {
+
+        const user = JSON.parse(
+            localStorage.getItem("user")
+        );
+
+        if (!user) {
+            return;
+        }
+
+        const customerId = user.customerId;
+
+        const data = await getWishlist(customerId);
+
+        setWishlist(data);
+
+    } catch (error) {
+
+        console.log(
+            "Wishlist loading error:",
+            error
+        );
+
+    }
+};
 
 
 
@@ -522,9 +556,104 @@ await getProductsByPriceRange(
 
     };
 
+const handleWishlist = async (productId) => {
+
+    try {
+
+        // Get logged-in user
+        const user = JSON.parse(
+            localStorage.getItem("user")
+        );
+
+        // If user is not logged in
+        if (!user) {
+
+            alert("Please login first");
+
+            return;
+        }
+
+        // Get customer ID
+        const customerId = user.customerId;
 
 
+        // Check whether product is already in wishlist
+        const isAlreadyInWishlist = wishlist.some(
+            (wish) => wish.productId === productId
+        );
 
+
+        // =====================================
+        // CASE 1: Product is already in wishlist
+        // So REMOVE it
+        // =====================================
+
+        if (isAlreadyInWishlist) {
+
+            await removeFromWishlist(
+                customerId,
+                productId
+            );
+
+
+            // Immediately update React state
+            setWishlist((previousWishlist) =>
+                previousWishlist.filter(
+                    (wish) =>
+                        wish.productId !== productId
+                )
+            );
+
+
+            console.log(
+                "Removed from wishlist"
+            );
+
+        }
+
+
+        // =====================================
+        // CASE 2: Product is NOT in wishlist
+        // So ADD it
+        // =====================================
+
+        else {
+
+            await addToWishlist(
+                customerId,
+                productId
+            );
+
+
+            // Immediately update React state
+            setWishlist((previousWishlist) => [
+
+                ...previousWishlist,
+
+                {
+                    customerId: customerId,
+                    productId: productId,
+                    status: 1
+                }
+
+            ]);
+
+
+            console.log(
+                "Added to wishlist"
+            );
+        }
+
+
+    } catch (error) {
+
+        console.log(
+            "Wishlist error:",
+            error
+        );
+
+    }
+};
 
 
 return (
@@ -787,10 +916,17 @@ item.productName
 />
 
 
-<span className="wishlist">
-
-♡
-
+<span
+    className="wishlist"
+    onClick={() => handleWishlist(item.productId)}
+>
+    {
+        wishlist.some(
+            (wish) => wish.productId === item.productId
+        )
+            ? "❤️"
+            : "♡"
+    }
 </span>
 
 

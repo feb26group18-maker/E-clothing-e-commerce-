@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8082/products";
-
+const BASE_URL = "http://localhost:8080/products";
 // Seller Product List
 export const getSellerProducts = async (sellerId) => {
     return await axios.get(`${BASE_URL}/seller/${sellerId}`);
@@ -18,57 +17,85 @@ export const deleteProduct = async (productId) => {
 };
 
 // Update Product
+// export const updateProduct = async (
+//     productId,
+//     product,
+//     newImages
+// )=>{
+
+
+// const formData = new FormData();
+
+
+// formData.append(
+// "product",
+// new Blob(
+// [
+// JSON.stringify(product)
+// ],
+// {
+// type:"application/json"
+// }
+// )
+// );
+
+
+
+// newImages.forEach(image=>{
+
+// formData.append(
+// "images",
+// image
+// );
+
+// });
+
+
+
+// return await axios.put(
+
+// `${BASE_URL}/${productId}`,
+
+// formData,
+
+// {
+// headers:{
+// "Content-Type":
+// "multipart/form-data"
+// }
+// }
+
+// );
+
+
+// };
+
 export const updateProduct = async (
     productId,
     product,
     newImages
-)=>{
+) => {
 
+    const formData = new FormData();
 
-const formData = new FormData();
+    formData.append(
+        "product",
+        new Blob(
+            [JSON.stringify(product)],
+            {
+                type: "application/json"
+            }
+        )
+    );
 
+    newImages.forEach((image) => {
+        formData.append("images", image);
+    });
 
-formData.append(
-"product",
-new Blob(
-[
-JSON.stringify(product)
-],
-{
-type:"application/json"
-}
-)
-);
-
-
-
-newImages.forEach(image=>{
-
-formData.append(
-"images",
-image
-);
-
-});
-
-
-
-return await axios.put(
-
-`${BASE_URL}/${productId}`,
-
-formData,
-
-{
-headers:{
-"Content-Type":
-"multipart/form-data"
-}
-}
-
-);
-
-
+    return await axios.put(
+        `${BASE_URL}/${productId}`,
+        formData
+    );
 };
 
 export const getProductCount = async (sellerId) => {
@@ -81,6 +108,35 @@ export const getProductCount = async (sellerId) => {
 
 
 // Add Product
+// export const addProduct = async (product, images) => {
+
+//     const formData = new FormData();
+
+//     formData.append(
+//         "product",
+//         new Blob(
+//             [JSON.stringify(product)],
+//             {
+//                 type: "application/json"
+//             }
+//         )
+//     );
+
+//     images.forEach((image) => {
+//         formData.append("images", image);
+//     });
+
+//     return await axios.post(
+//         BASE_URL,
+//         formData,
+//         {
+//             headers: {
+//                 "Content-Type": "multipart/form-data"
+//             }
+//         }
+//     );
+// };
+
 export const addProduct = async (product, images) => {
 
     const formData = new FormData();
@@ -99,16 +155,26 @@ export const addProduct = async (product, images) => {
         formData.append("images", image);
     });
 
-    return await axios.post(
-        BASE_URL,
-        formData,
-        {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
-        }
-    );
+    try {
+
+        const response = await axios.post(
+            BASE_URL,
+            formData
+        );
+
+        return response;
+
+    } catch (error) {
+        console.log("STATUS:", error.response?.status);
+        console.log(
+            "BACKEND RESPONSE:",
+            error.response?.data
+        );
+
+        throw error;
+    }
 };
+
 
 // ================= CUSTOMER PRODUCT APIs =================
 
@@ -177,7 +243,8 @@ export const getApprovedProducts = async () => {
 export const getSubCategoriesByCategory = async (categoryId) => {
 
     const response = await axios.get(
-        `http://localhost:8082/subcategories/category/${categoryId}`
+        // `http://localhost:8082/subcategories/category/${categoryId}`
+        `http://localhost:8080/subcategories/category/${categoryId}`
     );
 
     return response.data;
@@ -192,7 +259,8 @@ export const getProductsByPriceRange = async(
 
     const response = await fetch(
 
-        `http://localhost:8082/products/search-filter?categoryId=${categoryId}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+        // `http://localhost:8082/products/search-filter?categoryId=${categoryId}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+        `http://localhost:8080/products/search-filter?categoryId=${categoryId}&minPrice=${minPrice}&maxPrice=${maxPrice}`
 
     );
 
@@ -209,3 +277,4 @@ export const getProductsByPriceRange = async(
     return await response.json();
 
 };
+

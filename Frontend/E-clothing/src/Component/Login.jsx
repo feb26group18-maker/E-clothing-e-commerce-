@@ -27,7 +27,7 @@ export default function LoginComp() {
       }),
     };
 
-    fetch("http://localhost:8081/auth/login", reqoptions)
+    fetch("http://localhost:8080/auth/login", reqoptions)
       .then((resp) => resp.json())
       .then((data) => {
 
@@ -55,14 +55,17 @@ export default function LoginComp() {
             JSON.stringify({
               userId: data.userId,
               sellerId: data.sellerId,
+              customerId:data.customerId,
               name: data.name,
               email: data.email,
               role: data.role,
+              token: data.token
             })
           );
 
           localStorage.setItem("userId", data.userId);
           localStorage.setItem("sellerId", data.sellerId);
+          localStorage.setItem("customerId", data.customerId);
           localStorage.setItem("token", data.token);
 
           // Redirect according to role
@@ -136,11 +139,6 @@ export default function LoginComp() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-          </div>
-
-          {/* Forgot Password */}
-          <div className="forgot-password">
-            <a href="#">Forgot Password?</a>
           </div>
 
           {/* Error Message */}

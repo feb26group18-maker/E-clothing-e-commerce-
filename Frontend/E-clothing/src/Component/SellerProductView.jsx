@@ -21,7 +21,7 @@
 //     try {
 
 //       const response = await axios.get(
-//         `http://localhost:8082/products/${id}`
+//         `http://localhost:8080/products/${id}`
 //       );
 
 //       setProduct(response.data);
@@ -76,7 +76,7 @@
 
 //         <img
 //             key={index}
-//             src={`http://localhost:8082/uploads/${img}`}
+//             src={`http://localhost:8080/uploads/${img}`}
 //             alt="Product"
 //             className={selectedImage === index ? "thumb active" : "thumb"}
 //             onClick={() => setSelectedImage(index)}
@@ -213,7 +213,7 @@ export default function ViewProduct() {
   const fetchProduct = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8082/products/${id}`
+        `http://localhost:8080/products/${id}`
       );
 
       setProduct(response.data);

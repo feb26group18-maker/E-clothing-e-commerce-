@@ -27,12 +27,12 @@ DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `cart_id` int NOT NULL AUTO_INCREMENT,
   `c_id` int NOT NULL,
-  `cart_status` enum('Active','InActive') DEFAULT 'Active',
+  `cart_status` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`cart_id`),
   KEY `fk_cart_customer` (`c_id`),
   CONSTRAINT `fk_cart_customer` FOREIGN KEY (`c_id`) REFERENCES `customer` (`c_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (1,1,'Active','2026-07-09 15:31:38'),(2,2,'Active','2026-07-09 15:31:38'),(3,3,'Active','2026-07-09 15:31:38');
+INSERT INTO `cart` VALUES (1,9,'Active','2026-08-03 17:55:46'),(2,10,'Active','2026-08-03 19:50:06');
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,13 +56,14 @@ CREATE TABLE `cart_items` (
   `cart_item_id` int NOT NULL AUTO_INCREMENT,
   `cart_id` int NOT NULL,
   `p_id` int NOT NULL,
+  `size` varchar(255) DEFAULT NULL,
   `quantity` int NOT NULL DEFAULT '1',
   `added_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`cart_item_id`),
-  UNIQUE KEY `uq_cart_product` (`cart_id`,`p_id`),
+  UNIQUE KEY `uq_cart_product_size` (`cart_id`,`p_id`,`size`),
   KEY `fk_cart_items_product` (`p_id`),
   CONSTRAINT `fk_cart_items_cart` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_cart_items_product` FOREIGN KEY (`p_id`) REFERENCES `product` (`p_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_cart_items_product` FOREIGN KEY (`p_id`) REFERENCES `product` (`p_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `chk_quantity` CHECK ((`quantity` > 0))
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -73,7 +74,6 @@ CREATE TABLE `cart_items` (
 
 LOCK TABLES `cart_items` WRITE;
 /*!40000 ALTER TABLE `cart_items` DISABLE KEYS */;
-INSERT INTO `cart_items` VALUES (1,1,1,2,'2026-07-09 15:31:38'),(2,1,3,1,'2026-07-09 15:31:38'),(3,2,2,3,'2026-07-09 15:31:38'),(4,2,4,1,'2026-07-09 15:31:38'),(5,3,5,2,'2026-07-09 15:31:38');
 /*!40000 ALTER TABLE `cart_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`c_id`),
   UNIQUE KEY `u_id` (`u_id`),
   CONSTRAINT `fk_customer_user` FOREIGN KEY (`u_id`) REFERENCES `users` (`u_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,4,'Near Bus Stand','Nagpur','Maharashtra','440001'),(2,5,'Shivaji Nagar','Pune','Maharashtra','411005'),(3,6,'Civil Lines','Chandrapur','Maharashtra','442401'),(4,7,'Pune','Pune','Maharashtra','411001'),(5,10,'Kachiboli','Hyderabad','Telanagana','564321'),(6,11,'Mumbai','Mumbai','Maharashtra','443212'),(7,13,'Civil lines, Satara','Satara','Maharashtra','442001'),(8,16,'','','',''),(9,17,'Wardha','Wardha','Maharashtra','403212'),(10,18,'Singhpore','Singphore','Maharashtra','403212');
+INSERT INTO `customer` VALUES (1,4,'Near Bus Stand','Nagpur','Maharashtra','440001'),(2,5,'Shivaji Nagar','Pune','Maharashtra','411005'),(3,6,'Civil Lines','Chandrapur','Maharashtra','442401'),(4,7,'Pune','Pune','Maharashtra','411001'),(5,10,'Kachiboli','Hyderabad','Telanagana','564321'),(6,11,'Mumbai','Mumbai','Maharashtra','443212'),(7,13,'Civil lines, Satara','Satara','Maharashtra','442001'),(8,16,'','','',''),(9,17,'Ramnagar','Wardha','Maharashtra','403212'),(10,18,'Singhpore','Singphore','Maharashtra','403212'),(11,22,'Pratap Nagar','Satara','Maharashtra','987877');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,14 +145,14 @@ CREATE TABLE `order_items` (
   `order_id` int NOT NULL,
   `p_id` int NOT NULL,
   `quantity` int NOT NULL,
-  `price` decimal(10,2) NOT NULL,
+  `price` decimal(38,2) NOT NULL,
   PRIMARY KEY (`item_id`),
   KEY `fk_order_items_order` (`order_id`),
   KEY `fk_order_items_product` (`p_id`),
   CONSTRAINT `fk_order_items_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_order_items_product` FOREIGN KEY (`p_id`) REFERENCES `product` (`p_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `chk_order_quantity` CHECK ((`quantity` > 0))
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +161,7 @@ CREATE TABLE `order_items` (
 
 LOCK TABLES `order_items` WRITE;
 /*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
-INSERT INTO `order_items` VALUES (1,1,1,2,1499.00),(2,1,2,1,799.00),(3,2,4,1,999.00),(4,3,3,1,1899.00),(5,3,5,1,1199.00);
+INSERT INTO `order_items` VALUES (1,1,8,1,799.00),(3,3,3,1,799.00),(9,9,10,1,899.00),(10,10,2,1,1299.00),(11,11,9,1,599.00);
 /*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,13 +176,13 @@ CREATE TABLE `orders` (
   `order_id` int NOT NULL AUTO_INCREMENT,
   `c_id` int NOT NULL,
   `order_date` datetime DEFAULT CURRENT_TIMESTAMP,
-  `total_amount` decimal(10,2) NOT NULL,
+  `total_amount` decimal(38,2) NOT NULL,
   `order_status` enum('Pending','Confirmed','Shipped','Out For Delivery','Delivered','Cancelled','Returned') DEFAULT 'Pending',
   `payment_status` enum('Pending','Paid','Failed','Refunded') DEFAULT 'Pending',
   PRIMARY KEY (`order_id`),
   KEY `fk_orders_customer` (`c_id`),
   CONSTRAINT `fk_orders_customer` FOREIGN KEY (`c_id`) REFERENCES `customer` (`c_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +191,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,1,'2026-07-09 15:31:38',3797.00,'Delivered','Paid'),(2,2,'2026-07-09 15:31:38',999.00,'Shipped','Paid'),(3,3,'2026-07-09 15:31:38',3098.00,'Pending','Pending');
+INSERT INTO `orders` VALUES (1,9,'2026-08-03 17:56:21',799.00,'Delivered','Paid'),(3,9,'2026-08-03 19:37:57',799.00,'Pending','Paid'),(9,10,'2026-08-03 20:07:58',899.00,'Pending','Paid'),(10,9,'2026-08-04 18:49:57',1299.00,'Pending','Paid'),(11,9,'2026-08-05 09:41:55',599.00,'Pending','Pending');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,15 +205,15 @@ DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
   `payment_id` int NOT NULL AUTO_INCREMENT,
   `order_id` int NOT NULL,
-  `payment_method` enum('Cash On Delivery','UPI','Credit Card','Debit Card','Net Banking') NOT NULL,
+  `payment_method` varchar(255) NOT NULL,
   `payment_status` enum('Pending','Successful','Failed','Refunded') DEFAULT 'Pending',
-  `transaction_id` varchar(100) DEFAULT NULL,
+  `transaction_id` varchar(255) DEFAULT NULL,
   `payment_date` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`payment_id`),
   UNIQUE KEY `order_id` (`order_id`),
   UNIQUE KEY `transaction_id` (`transaction_id`),
   CONSTRAINT `fk_payment_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +222,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-INSERT INTO `payment` VALUES (1,1,'UPI','Successful','TXN100001','2026-07-09 15:31:38'),(2,2,'Credit Card','Successful','TXN100002','2026-07-09 15:31:38'),(3,3,'Cash On Delivery','Pending',NULL,'2026-07-09 15:31:38');
+INSERT INTO `payment` VALUES (1,1,'UPI','Successful','TXN-6fc57375-98c1-44e2-b196-0b3ee616b84f','2026-08-03 17:56:21'),(2,3,'UPI','Successful','TXN-1ff2e93d-144e-4586-9d14-b2f3107a83f1','2026-08-03 19:37:57'),(3,9,'Credit Card','Successful','TXN-9ed93694-eeaa-41cb-b694-e2b652ff5bdc','2026-08-03 20:07:58'),(4,10,'Credit Card','Successful','TXN-1b141164-f8fa-4760-84f0-15295aa72dda','2026-08-04 18:49:57'),(5,11,'Cash On Delivery','Pending',NULL,'2026-08-05 09:41:55');
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,7 +250,7 @@ CREATE TABLE `product` (
   KEY `fk_product_subcategory` (`subcat_id`),
   CONSTRAINT `fk_product_seller` FOREIGN KEY (`s_id`) REFERENCES `seller` (`s_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_product_subcategory` FOREIGN KEY (`subcat_id`) REFERENCES `subcategory` (`subcat_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,7 +259,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,8,1,'Formal White Shirt','Premium cotton formal shirt','L',1499.00,'Approved',0,'2026-07-30 23:56:07','2026-07-31 00:53:43'),(2,8,1,'Slim Fit Blue Shirt','Slim fit office shirt','M',1299.00,'Approved',0,'2026-07-30 23:59:01','2026-07-31 00:53:43'),(3,8,2,'Printed T-Shirt','100% cotton printed t-shirt','M',799.00,'Approved',0,'2026-07-31 00:03:37','2026-07-31 00:53:43'),(4,8,3,'Blue Denim Jeans','Stretchable denim jeans','L',1799.00,'Approved',0,'2026-07-31 00:05:05','2026-07-31 00:53:43'),(5,8,4,'Formal Trousers','Comfort fit formal trousers','L',1399.00,'Approved',0,'2026-07-31 00:06:28','2026-07-31 00:53:43'),(6,8,6,'Floral Summer Dress','Women floral dress','M',1899.00,'Approved',0,'2026-07-31 00:20:02','2026-07-31 00:53:43'),(7,8,7,'Blue Kurti','Rayon casual kurti','XL',999.00,'Approved',0,'2026-07-31 00:21:45','2026-07-31 00:53:43'),(8,8,8,'Stylish Crop Top','Fashion crop top','S',799.00,'Approved',0,'2026-07-31 00:23:36','2026-07-31 00:53:43'),(9,8,11,'Kids Printed T-Shirt','Soft cotton kids t-shirt','XS',599.00,'Approved',0,'2026-07-31 00:24:55','2026-07-31 00:53:43'),(10,8,14,'Kids Blue Jeans','Comfortable kids jeans','S',899.00,'Approved',0,'2026-07-31 00:26:54','2026-07-31 00:53:43'),(11,9,4,'Grey Office Trousers','Office wear trousers','XL',1494.00,'Pending',0,'2026-07-31 07:01:51','2026-07-31 07:01:51'),(12,9,7,'Pink Kurti','Cotton causal kurti','M',850.00,'Pending',0,'2026-07-31 07:03:50','2026-07-31 07:03:50'),(13,9,12,'Kids Floral Dress','Cute floral frock','XS',999.00,'Pending',0,'2026-07-31 07:05:44','2026-07-31 07:05:44'),(14,10,5,'Denim Jacket','Blue denim jacket','S',899.00,'Approved',0,'2026-07-31 13:30:10','2026-07-31 14:37:53'),(15,10,13,'Winter Hoodie','Kids fleece hoodie','S',1000.00,'Approved',0,'2026-07-31 13:31:44','2026-07-31 14:37:53');
+INSERT INTO `product` VALUES (1,8,1,'Formal White Shirt','Premium cotton formal shirt for mens','L',1499.00,'Pending',0,'2026-07-30 23:56:07','2026-08-04 19:07:11'),(2,8,1,'Slim Fit Blue Shirt','Slim fit office shirt','M',1299.00,'Approved',0,'2026-07-30 23:59:01','2026-07-31 00:53:43'),(3,8,2,'Printed T-Shirt','100% cotton printed t-shirt','M',799.00,'Approved',0,'2026-07-31 00:03:37','2026-07-31 00:53:43'),(4,8,3,'Blue Denim Jeans','Stretchable denim jeans','L',1799.00,'Approved',0,'2026-07-31 00:05:05','2026-07-31 00:53:43'),(5,8,4,'Formal Trousers','Comfort fit formal trousers','L',1399.00,'Approved',0,'2026-07-31 00:06:28','2026-07-31 00:53:43'),(6,8,6,'Floral Summer Dress','Women floral dress','M',1899.00,'Approved',0,'2026-07-31 00:20:02','2026-07-31 00:53:43'),(7,8,7,'Blue Kurti','Rayon casual kurti','XL',999.00,'Approved',0,'2026-07-31 00:21:45','2026-07-31 00:53:43'),(8,8,8,'Stylish Crop Top','Fashion crop top','S',799.00,'Approved',0,'2026-07-31 00:23:36','2026-07-31 00:53:43'),(9,8,11,'Kids Printed T-Shirt','Soft cotton kids t-shirt','XS',599.00,'Approved',0,'2026-07-31 00:24:55','2026-07-31 00:53:43'),(10,8,14,'Kids Blue Jeans','Comfortable kids jeans','S',899.00,'Approved',0,'2026-07-31 00:26:54','2026-07-31 00:53:43'),(11,9,4,'Grey Office Trousers','Office wear trousers','XL',1494.00,'Pending',0,'2026-07-31 07:01:51','2026-07-31 07:01:51'),(12,9,7,'Pink Kurti','Cotton causal kurti','M',850.00,'Pending',0,'2026-07-31 07:03:50','2026-07-31 07:03:50'),(13,9,12,'Kids Floral Dress','Cute floral frock','XS',999.00,'Pending',0,'2026-07-31 07:05:44','2026-07-31 07:05:44'),(14,10,5,'Denim Jacket','Blue denim jacket','S',899.00,'Approved',0,'2026-07-31 13:30:10','2026-07-31 14:37:53'),(15,10,13,'Winter Hoodie','Kids fleece hoodie','S',1000.00,'Approved',0,'2026-07-31 13:31:44','2026-07-31 14:37:53'),(16,11,7,'Klosa Women kurti','80% viscose rayon, 20% polyester','S',2000.00,'Approved',0,'2026-08-05 10:28:22','2026-08-05 10:35:00'),(17,11,9,'Miss chase wide leg jeans','Embrace the prefection with this blue jeans from Miss Chase. Made from high quality denim, it features zipper closure and solid pattern along with & design. Pair it with flats or wedges and a top to complete your ensemble.','L',999.00,'Pending',0,'2026-08-05 10:41:48','2026-08-05 10:41:48'),(18,11,2,'Test Shirt','Test','M',799.00,'Pending',0,'2026-08-05 11:08:18','2026-08-05 11:08:18'),(19,11,9,'Black jeans','Black jeans wide leg','M',799.00,'Approved',0,'2026-08-05 11:12:00','2026-08-05 11:37:14'),(20,11,9,'high raise','High raise wide leg','M',799.00,'Approved',0,'2026-08-05 11:16:18','2026-08-05 11:28:11'),(21,11,14,'testingg','testingg','S',8895.00,'Pending',1,'2026-08-05 11:24:35','2026-08-05 11:25:38'),(22,11,13,'Brown hoodie','Brown kids hoodie for winter season','S',750.00,'Approved',0,'2026-08-05 11:26:54','2026-08-05 11:28:00');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +277,7 @@ CREATE TABLE `product_images` (
   PRIMARY KEY (`image_id`),
   KEY `fk_product_images` (`p_id`),
   CONSTRAINT `fk_product_images` FOREIGN KEY (`p_id`) REFERENCES `product` (`p_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,7 +286,7 @@ CREATE TABLE `product_images` (
 
 LOCK TABLES `product_images` WRITE;
 /*!40000 ALTER TABLE `product_images` DISABLE KEYS */;
-INSERT INTO `product_images` VALUES (1,1,'db0c696e-9014-4702-b22b-23b39303f01d_shirt.jpg'),(3,2,'618e3196-89d7-4c9e-a465-ce8062fb7cf0_solidblue.webp'),(4,3,'09b31736-94b6-4c1a-a0b5-a92abbbcf4ec_printedtshirt.webp'),(5,4,'6a24792d-5161-436b-b035-f6fd68ff850c_Stretchabledenimjeans.webp'),(6,5,'4b8d5db4-bcaa-4410-a78f-ffca6a4ca8fb_formaltrousers.jfif'),(7,6,'c6e70a83-e000-49ab-8862-afe73647bed1_floraldress.jfif'),(8,7,'0d7ced04-4479-46db-8965-9644b64eaa5e_rayonkurti.jfif'),(9,8,'fa5e4571-e4d8-4340-ac4f-54b02a83551c_croptop.webp'),(10,9,'9eb37a5a-9fbc-4f92-81fa-56da93013181_kidstshirt.jpg'),(11,10,'6eb94aea-9f82-4300-bb91-cf1375fc2b22_kidsjeans.avif'),(12,11,'5465ea68-8c37-49ab-995c-3d00f36a1073_officewear.jpg'),(13,12,'51b33241-c254-4c16-aeaf-79757e158610_pinkkurti.webp'),(14,13,'e6f320a8-3e2a-4aba-8897-23b94759bb72_cutefloral.webp'),(15,14,'d9b6d635-4f36-4234-9304-8542eb83b82e_denimjacket.webp'),(16,15,'8c097945-e93c-42d4-ac1e-14b183315aea_hoodie.jfif');
+INSERT INTO `product_images` VALUES (1,1,'db0c696e-9014-4702-b22b-23b39303f01d_shirt.jpg'),(3,2,'618e3196-89d7-4c9e-a465-ce8062fb7cf0_solidblue.webp'),(4,3,'09b31736-94b6-4c1a-a0b5-a92abbbcf4ec_printedtshirt.webp'),(5,4,'6a24792d-5161-436b-b035-f6fd68ff850c_Stretchabledenimjeans.webp'),(6,5,'4b8d5db4-bcaa-4410-a78f-ffca6a4ca8fb_formaltrousers.jfif'),(7,6,'c6e70a83-e000-49ab-8862-afe73647bed1_floraldress.jfif'),(8,7,'0d7ced04-4479-46db-8965-9644b64eaa5e_rayonkurti.jfif'),(9,8,'fa5e4571-e4d8-4340-ac4f-54b02a83551c_croptop.webp'),(10,9,'9eb37a5a-9fbc-4f92-81fa-56da93013181_kidstshirt.jpg'),(11,10,'6eb94aea-9f82-4300-bb91-cf1375fc2b22_kidsjeans.avif'),(12,11,'5465ea68-8c37-49ab-995c-3d00f36a1073_officewear.jpg'),(13,12,'51b33241-c254-4c16-aeaf-79757e158610_pinkkurti.webp'),(14,13,'e6f320a8-3e2a-4aba-8897-23b94759bb72_cutefloral.webp'),(15,14,'d9b6d635-4f36-4234-9304-8542eb83b82e_denimjacket.webp'),(16,15,'8c097945-e93c-42d4-ac1e-14b183315aea_hoodie.jfif'),(17,16,'04618918-13d7-4f93-aee0-c12c7bf7544a_Klosakurti.webp'),(18,17,'49118dc3-bafb-4323-96e8-4819017bddb7_wideleg.webp'),(19,18,'02990ce0-dac4-4721-935e-a9d14c381547_hmjeans.webp'),(20,19,'feced296-b3f5-4382-a0a8-bdb7b52eefc1_black.webp'),(21,20,'bf79ced2-5ca1-4c2b-a6d7-c200d4a7c4ce_highraise.webp'),(23,21,'f78547e0-586b-49b0-9683-1d4262bdc4f7_8.jpg'),(24,22,'7c43a091-4c28-4a9a-a543-57e87c83e364_kidss.webp');
 /*!40000 ALTER TABLE `product_images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -305,7 +305,7 @@ CREATE TABLE `product_inventory` (
   PRIMARY KEY (`inventory_id`),
   KEY `fk_inventory_product` (`p_id`),
   CONSTRAINT `fk_inventory_product` FOREIGN KEY (`p_id`) REFERENCES `product` (`p_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,7 +314,7 @@ CREATE TABLE `product_inventory` (
 
 LOCK TABLES `product_inventory` WRITE;
 /*!40000 ALTER TABLE `product_inventory` DISABLE KEYS */;
-INSERT INTO `product_inventory` VALUES (1,1,50,'2026-07-31 00:30:23'),(2,2,30,'2026-07-31 00:30:23'),(3,3,45,'2026-07-31 00:30:23'),(4,4,20,'2026-07-31 00:30:23'),(5,5,60,'2026-07-31 00:30:23'),(6,6,35,'2026-07-31 00:30:23'),(7,7,40,'2026-07-31 00:30:23'),(8,8,25,'2026-07-31 00:30:23'),(9,9,55,'2026-07-31 00:30:23'),(10,10,15,'2026-07-31 00:30:23'),(11,11,85,'2026-07-31 07:08:14'),(12,12,65,'2026-07-31 07:08:14'),(13,13,100,'2026-07-31 07:08:14'),(14,14,100,'2026-07-31 13:34:23'),(15,15,80,'2026-07-31 13:34:23');
+INSERT INTO `product_inventory` VALUES (1,1,50,'2026-07-31 00:30:23'),(2,2,30,'2026-07-31 00:30:23'),(3,3,45,'2026-07-31 00:30:23'),(4,4,20,'2026-07-31 00:30:23'),(5,5,60,'2026-07-31 00:30:23'),(6,6,35,'2026-07-31 00:30:23'),(7,7,40,'2026-07-31 00:30:23'),(8,8,25,'2026-07-31 00:30:23'),(9,9,55,'2026-07-31 00:30:23'),(10,10,15,'2026-07-31 00:30:23'),(11,11,85,'2026-07-31 07:08:14'),(12,12,65,'2026-07-31 07:08:14'),(13,13,100,'2026-07-31 07:08:14'),(14,14,100,'2026-07-31 13:34:23'),(15,15,80,'2026-07-31 13:34:23'),(16,1,100,'2026-08-04 19:07:59'),(17,16,200,'2026-08-05 10:30:24'),(18,17,1000,'2026-08-05 10:42:19');
 /*!40000 ALTER TABLE `product_inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -388,7 +388,7 @@ CREATE TABLE `seller` (
   UNIQUE KEY `u_id` (`u_id`),
   UNIQUE KEY `gst_number` (`gst_number`),
   CONSTRAINT `fk_seller_user` FOREIGN KEY (`u_id`) REFERENCES `users` (`u_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -397,7 +397,7 @@ CREATE TABLE `seller` (
 
 LOCK TABLES `seller` WRITE;
 /*!40000 ALTER TABLE `seller` DISABLE KEYS */;
-INSERT INTO `seller` VALUES (1,2,'Rahul Fashion Hub','27ABCDE1234F1Z5','FC Road, Pune'),(2,3,'Sneha Clothing Store','27PQRSX5678L2Z6','JM Road, Pune'),(3,8,'ABC Fashion Store','GST123456789','FC Road, Pune'),(4,9,'urban Store','GST12','Delhi, Nagpur'),(5,12,'Gopal Stores','GST12345','Saraf Line, Wardha'),(6,14,'Diva Shop','GST238','Hyderabad'),(7,15,'Muskan Shop collection','GST33','Delhi'),(8,19,'urban Storeee','GST12121','Delhii, Nagpur'),(9,20,'Tashastu','GST1110','Gachiboli, Hyderabad'),(10,21,'Savana Clothes','GST1112','Singaphore');
+INSERT INTO `seller` VALUES (1,2,'Rahul Fashion Hub','27ABCDE1234F1Z5','FC Road, Pune'),(2,3,'Sneha Clothing Store','27PQRSX5678L2Z6','JM Road, Pune'),(3,8,'ABC Fashion Store','GST123456789','FC Road, Pune'),(4,9,'urban Store','GST12','Delhi, Nagpur'),(5,12,'Gopal Stores','GST12345','Saraf Line, Wardha'),(6,14,'Diva Shop','GST238','Hyderabad'),(7,15,'Muskan Shop collection','GST33','Delhi'),(8,19,'urban Store','GST12129','Delhii, Nagpurr'),(9,20,'Tashastu','GST1110','Gachiboli, Hyderabad'),(10,21,'Savana Clothes','GST1112','Singaphore'),(11,23,'Heritage Attire','GST76756','Shop No. 12, Ground Floor, Phoenix Marketcity, Vimannagar, Pune, Maharashtra 411014');
 /*!40000 ALTER TABLE `seller` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -451,7 +451,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `mobile` (`mobile`),
   KEY `fk_users_role` (`role_id`),
   CONSTRAINT `fk_users_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -460,7 +460,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,1,'Admin','admin@eclothing.com','9000000001','admin123',1,'2026-07-09 15:31:38',0),(2,2,'Rahul','rahul@gmail.com','9000000002','$2a$2a$10$7wM0oFj4y9kJzLkX8L5xYu4t4u4Y6hL9Q0OQ8L7k1g2mWzV8QxFzS',1,'2026-07-09 15:31:38',0),(3,2,'Sneha','sneha@gmail.com','9000000003','sneha123',1,'2026-07-09 15:31:38',0),(4,3,'Amit','amit@gmail.com','9000000004','amit123',1,'2026-07-09 15:31:38',0),(5,3,'Priya','priya@gmail.com','9000000005','priya123',1,'2026-07-09 15:31:38',0),(6,3,'Rohan','rohan@gmail.com','9000000006','rohan123',1,'2026-07-09 15:31:38',0),(7,3,'Saloni','saloni@gmail.com','9876543210','123456',1,'2026-07-22 22:27:46',0),(8,2,'ABC Fashion','seller@gmail.com','9876543211','123456',1,'2026-07-22 22:52:48',0),(9,2,'Urban','urbann@gmail.com','56564444','12345',0,'2026-07-22 22:59:36',0),(10,3,'Pooja','pooja@gmail.com','90876543221','123456',1,'2026-07-23 20:07:01',0),(11,3,'Testing','testing@gmail.com','123456789','123456',1,'2026-07-23 20:30:09',1),(12,2,'Gopal Stores','gopal@gmail.com','908988888','12345',0,'2026-07-23 20:36:04',1),(13,3,'Samir','samir@gmail.com','987654323','123456',1,'2026-07-23 22:04:59',0),(14,2,'Ayushi','ayushi@gmail.com','9876556666','12345',0,'2026-07-23 22:21:10',0),(15,2,'Nilima','nilima@gmail.com','78654332','123456',0,'2026-07-23 22:38:49',0),(16,3,'','','','',1,'2026-07-23 22:39:25',0),(17,3,'Shivani','shivani@gmail.com','8797777777','$2a$10$EOFKEz7xaOWfjALm19KgNuUazQVG8ZR0.5SGp5gEUXW5UN9GMso7e',1,'2026-07-24 12:08:57',0),(18,3,'Gautami','gautami@gmail.com','987654422','$2a$10$WQllKxb2XuXXJSbL0s58teSTunCfVPwd5c.LNDxAhkUTfOsQCMfpu',1,'2026-07-24 20:36:57',0),(19,2,'Urban','urbannn@gmail.com','5656444400','$2a$10$.FswP5c1D4XBcNroaL0btOAXdc11xSK1fhm/hWgDhpWnN6xN8arnq',1,'2026-07-24 20:39:12',0),(20,2,'Supriya','supriya@gmail.com','8791234544','$2a$10$bRvyAY9NkevVeU3iJ3R4juZjpZ0ECFm90Ln6flTwEMxY28lN0gaYq',1,'2026-07-31 06:46:19',0),(21,2,'John','john@gmail.com','9909765766','$2a$10$4xbadl5EqF44INivA3EFF.VzyJibp8s2eFWask90n7ifWwkQ71oyq',1,'2026-07-31 06:50:13',0);
+INSERT INTO `users` VALUES (1,1,'Admin','admin@eclothing.com','9000000001','admin123',1,'2026-07-09 15:31:38',0),(2,2,'Rahul','rahul@gmail.com','9000000002','$2a$2a$10$7wM0oFj4y9kJzLkX8L5xYu4t4u4Y6hL9Q0OQ8L7k1g2mWzV8QxFzS',1,'2026-07-09 15:31:38',0),(3,2,'Sneha','sneha@gmail.com','9000000003','sneha123',1,'2026-07-09 15:31:38',0),(4,3,'Amit','amit@gmail.com','9000000004','amit123',1,'2026-07-09 15:31:38',0),(5,3,'Priya','priya@gmail.com','9000000005','priya123',1,'2026-07-09 15:31:38',0),(6,3,'Rohan','rohan@gmail.com','9000000006','rohan123',1,'2026-07-09 15:31:38',0),(7,3,'Saloni','saloni@gmail.com','9876543210','123456',1,'2026-07-22 22:27:46',0),(8,2,'ABC Fashion','seller@gmail.com','9876543211','123456',1,'2026-07-22 22:52:48',0),(9,2,'Urban','urbann@gmail.com','56564444','12345',0,'2026-07-22 22:59:36',0),(10,3,'Pooja','pooja@gmail.com','90876543221','123456',1,'2026-07-23 20:07:01',0),(11,3,'Testing','testing@gmail.com','123456789','123456',1,'2026-07-23 20:30:09',1),(12,2,'Gopal Stores','gopal@gmail.com','908988888','12345',0,'2026-07-23 20:36:04',1),(13,3,'Samir','samir@gmail.com','987654323','123456',1,'2026-07-23 22:04:59',0),(14,2,'Ayushi','ayushi@gmail.com','9876556666','12345',0,'2026-07-23 22:21:10',0),(15,2,'Nilima','nilima@gmail.com','78654332','123456',0,'2026-07-23 22:38:49',0),(16,3,'','','','',1,'2026-07-23 22:39:25',0),(17,3,'Shivani','shivani@gmail.com','8797777777','$2a$10$EOFKEz7xaOWfjALm19KgNuUazQVG8ZR0.5SGp5gEUXW5UN9GMso7e',1,'2026-07-24 12:08:57',0),(18,3,'Gautami','gautami@gmail.com','987654422','$2a$10$WQllKxb2XuXXJSbL0s58teSTunCfVPwd5c.LNDxAhkUTfOsQCMfpu',1,'2026-07-24 20:36:57',0),(19,2,'Urban','urbannn@gmail.com','56564444000','$2a$10$.FswP5c1D4XBcNroaL0btOAXdc11xSK1fhm/hWgDhpWnN6xN8arnq',1,'2026-07-24 20:39:12',0),(20,2,'Supriya','supriya@gmail.com','8791234544','$2a$10$bRvyAY9NkevVeU3iJ3R4juZjpZ0ECFm90Ln6flTwEMxY28lN0gaYq',1,'2026-07-31 06:46:19',0),(21,2,'John','john@gmail.com','9909765766','$2a$10$4xbadl5EqF44INivA3EFF.VzyJibp8s2eFWask90n7ifWwkQ71oyq',1,'2026-07-31 06:50:13',0),(22,3,'Avanti','avanti@gmail.com','9898988888','$2a$10$YA9Y1zUG.fIaUca96B1ZkO/408NY8jezyPCzPGUsK9Jk1XDFlbIc6',1,'2026-08-05 10:17:55',0),(23,2,'Shruti','shruti@gmail.com','7687532222','$2a$10$oWDTyRmR33aZTUvAMRWrG.oVtHEB0VHC1RdlqXiEDGyzHuOH.Yaqu',1,'2026-08-05 10:19:50',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -475,14 +475,10 @@ CREATE TABLE `wishlist` (
   `wishlist_id` int NOT NULL AUTO_INCREMENT,
   `c_id` int NOT NULL,
   `p_id` int NOT NULL,
-  `added_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `status` int DEFAULT '0',
-  PRIMARY KEY (`wishlist_id`),
-  UNIQUE KEY `uq_customer_product` (`c_id`,`p_id`),
-  KEY `fk_wishlist_product` (`p_id`),
-  CONSTRAINT `fk_wishlist_customer` FOREIGN KEY (`c_id`) REFERENCES `customer` (`c_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_wishlist_product` FOREIGN KEY (`p_id`) REFERENCES `product` (`p_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `added_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`wishlist_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -491,7 +487,7 @@ CREATE TABLE `wishlist` (
 
 LOCK TABLES `wishlist` WRITE;
 /*!40000 ALTER TABLE `wishlist` DISABLE KEYS */;
-INSERT INTO `wishlist` VALUES (1,1,1,'2026-07-09 15:31:38',0),(2,1,3,'2026-07-09 15:31:38',0),(3,2,2,'2026-07-09 15:31:38',0),(4,2,4,'2026-07-09 15:31:38',0),(5,3,1,'2026-07-09 15:31:38',0);
+INSERT INTO `wishlist` VALUES (1,9,7,0,'2026-07-31 21:34:08'),(2,9,8,0,'2026-08-03 10:48:25'),(3,9,6,0,'2026-08-03 11:53:45'),(4,9,1,0,'2026-08-03 12:10:53'),(5,9,2,0,'2026-08-03 17:55:22'),(6,9,3,0,'2026-08-03 19:31:53'),(7,10,10,0,'2026-08-03 19:49:54'),(8,9,9,0,'2026-08-05 09:39:57');
 /*!40000 ALTER TABLE `wishlist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -504,4 +500,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-31 17:34:50
+-- Dump completed on 2026-08-05 15:12:44

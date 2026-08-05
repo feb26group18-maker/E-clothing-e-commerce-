@@ -38,6 +38,10 @@ import SalesReport from './Component/SalesReport'
 import EditSellerProfile from './Component/EditSellerProfile'
 import AddProduct from './Component/AddProduct'
 import EditProduct from './Component/EditProduct'
+import Address from './Component/Address'
+import Payment from './Component/Payment'
+import MyOrder from './Component/MyOrder'
+import CustomerOrderDetails from './Component/CustomerOrderDetails'
 
 
 
@@ -123,6 +127,29 @@ function App() {
           {/* Global Logout Route */}
           <Route path="/logout" element={<Logout />} />
 
+          <Route path="men" element={<Men />} />
+            <Route path="women" element={<Women />} />
+            <Route path="kids" element={<Kids />} />
+            <Route path="cart" element={<Cart />} />
+               <Route
+        path="/customer/address"
+        element={<Address />}
+    />
+    <Route
+        path="/customer/payment"
+        element={<Payment />}
+    />
+    <Route
+            path="/orders"
+            element={<MyOrder />}
+          /> 
+          <Route
+    path="/customer/order-details/:orderId"
+    element={<CustomerOrderDetails />}
+/>
+    
+
+
           {/* User Routes */}
           <Route
             path="/user"
@@ -135,10 +162,10 @@ function App() {
             <Route index element={<Home />} />
             <Route path="search" element={<h1>Search</h1>} />
             <Route path="booking" element={<h1>Booking</h1>} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="men" element={<Men />} />
+            {/* <Route path="cart" element={<Cart />} /> */}
+            {/* <Route path="men" element={<Men />} />
             <Route path="women" element={<Women />} />
-            <Route path="kids" element={<Kids />} />
+            <Route path="kids" element={<Kids />} /> */}
 
           </Route>
 

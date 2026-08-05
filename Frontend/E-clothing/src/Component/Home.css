@@ -601,6 +601,7 @@ body {
 
 .category-card {
   overflow: hidden;
+  cursor:pointer;
 }
 
 .category-card img {
@@ -644,4 +645,87 @@ body {
     crimson,
     #ff5e7e
   );
+}
+.why-section{
+    text-align:center;
+    margin:60px 0;
+}
+
+
+.why-section h2{
+    font-size:30px;
+    margin-bottom:30px;
+}
+
+
+.why-container{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+}
+
+
+.why-card{
+    width:260px;
+    padding:25px;
+    border-radius:15px;
+    background:#fafafa;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+
+.why-card h3{
+    font-size:20px;
+    margin-bottom:15px;
+}
+
+
+.why-card p{
+    color:#666;
+    line-height:1.5;
+}
+
+.navbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 30px !important;
+}
+
+.nav-categories {
+    display: flex !important;
+    align-items: center !important;
+    gap: 25px !important;
+    margin-left: 20px !important;
+}
+
+.nav-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 25px !important;
+    margin-left: 0 !important;
+}
+
+.navbar {
+    display: flex !important;
+    align-items: center !important;
+    padding: 12px 40px !important;
+}
+
+.logo {
+    flex-shrink: 0;
+}
+
+.nav-categories {
+    display: flex !important;
+    align-items: center !important;
+    gap: 25px !important;
+    margin-left: auto !important;
+}
+
+.nav-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 25px !important;
+    margin-left: 20px !important;
 }

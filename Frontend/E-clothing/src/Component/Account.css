@@ -116,7 +116,60 @@
 }
 
 /* Buttons */
+
 .btn-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-section button {
+    width: 150px;
+    height: 42px;
+    margin: 0;
+    padding: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 25px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+/* Back to Dashboard */
+
+.btn-section .dashboard-btn {
+    background: #2874f0;
+    color: white;
+}
+
+.btn-section .dashboard-btn:hover {
+    background: #1659c7;
+}
+
+/* Logout */
+
+.btn-section .logout-btn {
+    background: #e53935;
+    color: white;
+}
+
+.btn-section .logout-btn:hover {
+    background: #c62828;
+}
+
+/* .btn-section {
   display: flex;
   justify-content: center;
   gap: 15px;
@@ -150,7 +203,7 @@
 
 .logout-btn:hover {
   background: #c62828;
-}
+} */
 
 /* Mobile Responsive */
 @media (max-width: 768px) {

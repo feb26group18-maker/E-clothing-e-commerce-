@@ -4,10 +4,23 @@ import Footer from "./Footer";
 export default function Home() {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const categories =
-    [{ name: "Men", image: "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg", },
-    { name: "Women", image: "https://images.pexels.com/photos/994523/pexels-photo-994523.jpeg", },
-    { name: "Kids", image: "https://images.pexels.com/photos/1620760/pexels-photo-1620760.jpeg", },];
+  const categories = [
+    {
+      name: "Men",
+      image: "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg",
+      path: "/men"
+    },
+    {
+      name: "Women",
+      image: "https://images.pexels.com/photos/994523/pexels-photo-994523.jpeg",
+      path: "/women"
+    },
+    {
+      name: "Kids",
+      image: "https://images.pexels.com/photos/1620760/pexels-photo-1620760.jpeg",
+      path: "/kids"
+    }
+  ];
   const products = [{ id: 1, name: "Men Jacket", price: "₹1499", image: "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg", },
   { id: 2, name: "Women Dress", price: "₹999", image: "https://images.pexels.com/photos/994523/pexels-photo-994523.jpeg", },
   { id: 3, name: "Kids Wear", price: "₹799", image: "https://images.pexels.com/photos/1620760/pexels-photo-1620760.jpeg", },
@@ -84,20 +97,106 @@ export default function Home() {
             <span className="carousel-control-next-icon"></span>
           </button>
         </div>
-      </section> {/* Hero Banner */} <section className="hero">
+      </section> {/* Hero Banner */}
+      <section className="hero">
+
         <div>
           <h1>Discover Your Style</h1>
-          <p> Explore trendy collections for Men, Women and Kids. </p>
-          <button className="shop-btn"> Shop Now </button>
+
+          <p>
+            Explore the world of fashion with our premium collections
+            designed for Men, Women, and Kids. Discover trendy outfits,
+            stylish accessories, and comfortable everyday wear crafted
+            with quality materials and modern designs.
+          </p>
+
+          <p>
+            Whether you are looking for casual street style, elegant
+            party wear, or the latest seasonal trends, we bring you
+            a wide range of fashion choices that match your personality
+            and lifestyle.
+          </p>
+
+          <p>
+            Shop confidently with us and experience the perfect
+            combination of style, comfort, and affordability.
+            Upgrade your wardrobe with fashion that makes every moment special.
+          </p>
         </div>
-        <img src="https://images.pexels.com/photos/994523/pexels-photo-994523.jpeg" alt="fashion" />
-      </section> {/* Categories */} <section className="section">
+
+        <img
+          src="https://images.pexels.com/photos/994523/pexels-photo-994523.jpeg"
+          alt="fashion"
+        />
+
+      </section>
+      <section className="why-section">
+
+        <h2>Why Choose Us</h2>
+
+        <div className="why-container">
+
+          <div className="why-card">
+            <h3>👗 Trendy Fashion</h3>
+            <p>
+              Latest styles and modern collections
+              for every occasion.
+            </p>
+          </div>
+
+
+          <div className="why-card">
+            <h3>✨ Premium Quality</h3>
+            <p>
+              Carefully selected products with
+              great comfort and design.
+            </p>
+          </div>
+
+
+          <div className="why-card">
+            <h3>💰 Affordable Price</h3>
+            <p>
+              Stylish outfits at prices
+              everyone can enjoy.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+      {/* Categories */}
+      <section className="section">
+
         <h2>Shop By Category</h2>
-        <div className="category-grid"> {categories.map((item, index) => (<div className="category-card" key={index}>
-          <img src={item.image} alt={item.name} />
-          <h4>{item.name}</h4>
-        </div>))} </div>
-      </section> {/* Products */}
-   <Footer/>
+
+        <div className="category-grid">
+
+          {
+            categories.map((item, index) => (
+
+              <div
+                className="category-card"
+                key={index}
+                onClick={() => navigate(item.path)}
+              >
+
+                <img
+                  src={item.image}
+                  alt={item.name}
+                />
+
+                <h4>{item.name}</h4>
+
+              </div>
+
+            ))
+          }
+
+        </div>
+
+      </section>
+      {/* Products */}
+      <Footer />
     </>);
 }

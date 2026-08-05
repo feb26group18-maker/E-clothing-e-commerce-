@@ -1,0 +1,242 @@
+/* ==========================================
+   ADDRESS PAGE
+========================================== */
+
+.address-page{
+    background:#fdf7f9;
+    min-height:100vh;
+    padding:40px 0;
+}
+
+.address-container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:35px;
+
+    align-items:start;
+}
+
+/* ==========================================
+   LEFT
+========================================== */
+
+.address-form-box{
+    background:#fff;
+    padding:35px;
+    border-radius:8px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.address-form-box h2{
+    margin-bottom:30px;
+    text-align:center;
+    color:#222;
+    font-size:32px;
+}
+
+/* ==========================================
+   FORM
+========================================== */
+
+.address-form-box form{
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+}
+
+/* two inputs in one row */
+
+.form-row{
+
+    display:flex;
+    gap:18px;
+
+}
+
+.form-row input{
+
+    flex:1;
+
+}
+
+.address-form-box input,
+.address-form-box textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #ddd;
+
+    border-radius:6px;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.3s;
+
+    box-sizing:border-box;
+
+}
+
+.address-form-box textarea{
+
+    resize:none;
+
+}
+
+.address-form-box input:focus,
+.address-form-box textarea:focus{
+
+    border-color:#ff3f6c;
+
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.save-address-btn{
+
+    margin-top:10px;
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:6px;
+
+    background:#ff3f6c;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.save-address-btn:hover{
+
+    background:#e7335f;
+
+}
+
+/* ==========================================
+   RIGHT SUMMARY
+========================================== */
+
+.address-summary{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:8px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+    position:sticky;
+
+    top:90px;
+
+}
+
+.address-summary h3{
+
+    margin-bottom:20px;
+
+    color:#444;
+
+    font-size:22px;
+
+}
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:16px;
+
+    color:#555;
+
+}
+
+.summary-total{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:20px;
+
+    padding-top:20px;
+
+    border-top:1px solid #ddd;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media(max-width:900px){
+
+.address-container{
+
+grid-template-columns:1fr;
+
+}
+
+.address-summary{
+
+position:static;
+
+}
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:600px){
+
+.form-row{
+
+flex-direction:column;
+
+}
+
+.address-form-box{
+
+padding:20px;
+
+}
+
+.address-form-box h2{
+
+font-size:28px;
+
+}
+
+}

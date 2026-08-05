@@ -40,9 +40,9 @@ export default function SellerDashboard() {
              Orders
           </NavLink>
 
-           <NavLink to="salesreport">
+           {/* <NavLink to="salesreport">
              Sales Report
-          </NavLink>
+          </NavLink> */}
 
           <NavLink to="profile">
             Profile

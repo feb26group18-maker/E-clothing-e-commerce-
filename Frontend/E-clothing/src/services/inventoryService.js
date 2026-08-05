@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:8082";
+const BASE_URL = "http://localhost:8080";
 export const getSellerInventory = async (sellerId) => {
     const response =
         await fetch(
@@ -15,7 +15,7 @@ export const getSellerInventory = async (sellerId) => {
 export const addInventoryStock = async (data) => {
     const response =
         await axios.post(
-            "http://localhost:8082/inventory",
+            "http://localhost:8080/inventory",
             data
         );
     return response.data;

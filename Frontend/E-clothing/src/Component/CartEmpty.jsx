@@ -18,7 +18,7 @@ export default function CartEmpty() {
 
       <button
         className="cart-btn"
-        onClick={() => navigate("/login")}
+        onClick={() => navigate("/user")}
       >
         EXPLORE PRODUCTS
       </button>
