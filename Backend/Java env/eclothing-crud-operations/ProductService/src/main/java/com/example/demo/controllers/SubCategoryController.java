@@ -12,7 +12,6 @@ package com.example.demo.controllers;
 
 	@RestController
 	@RequestMapping("/subcategories")
-	@CrossOrigin(origins = "http://localhost:5173")
 	public class SubCategoryController {
 
 	    @Autowired
