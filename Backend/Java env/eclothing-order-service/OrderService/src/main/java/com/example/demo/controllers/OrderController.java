@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.demo.dto.OrderResponse;
 import com.example.demo.dto.PlaceOrderRequest;
 import com.example.demo.dto.SellerOrderResponse;
 import com.example.demo.entities.Order;
@@ -99,6 +100,20 @@ public class OrderController {
         return ResponseEntity.ok(order);
     }
     
+    
+    @GetMapping
+    public ResponseEntity<List<OrderResponse>> getAllOrders() {
+        return ResponseEntity.ok(orderService.getAllOrders());
+    }
+    
+    @GetMapping("/count")
+    public ResponseEntity<Long> getOrderCount() {
+
+        return ResponseEntity.ok(
+                orderService.getOrderCount()
+        );
+
+    }
 
 
     

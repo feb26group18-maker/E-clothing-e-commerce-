@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.OrderItemRequest;
+import com.example.demo.dto.OrderResponse;
 import com.example.demo.dto.PlaceOrderRequest;
 import com.example.demo.dto.SellerOrderItemResponse;
 import com.example.demo.dto.SellerOrderResponse;
@@ -25,6 +26,7 @@ import com.example.demo.entities.Payment;
 import com.example.demo.entities.PaymentMethod;
 import com.example.demo.entities.PaymentStatus;
 import com.example.demo.entities.PaymentTableStatus;
+import com.example.demo.exception.InsufficientStockException;
 import com.example.demo.repository.OrderItemRepository;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.repository.PaymentRepository;
@@ -35,6 +37,7 @@ import com.example.demo.entities.CartItem;
 import com.example.demo.repository.CartRepository;
 import org.springframework.web.client.RestClient;
 import com.example.demo.dto.SellerProductResponse;
+
 
 @Service
 public class OrderService {
@@ -61,6 +64,18 @@ public class OrderService {
 
     @Transactional
     public Order placeOrder(PlaceOrderRequest request) {
+    	
+    	// ==========================================
+        // 0. CHECK STOCK BEFORE CREATING ORDER
+        // ==========================================
+
+        for (OrderItemRequest itemRequest : request.getItems()) {
+
+            checkStock(
+                    itemRequest.getProductId(),
+                    itemRequest.getQuantity()
+            );
+        }
 
         // ==========================================
         // 1. CREATE ORDER
@@ -101,6 +116,14 @@ public class OrderService {
             item.setPrice(itemRequest.getPrice());
 
             orderItemRepository.save(item);
+            // ==========================================
+            // UPDATE PRODUCT SOLD STOCK
+            // ==========================================
+
+            addSoldStock(
+                    itemRequest.getProductId(),
+                    itemRequest.getQuantity()
+            );
         }
 
 
@@ -136,7 +159,7 @@ public class OrderService {
 
          // payment.payment_status = Pending
          payment.setPaymentStatus(
-                 PaymentTableStatus.Pending
+                 PaymentTableStatus.Successful
          );
 
          // COD has no transaction ID
@@ -144,7 +167,7 @@ public class OrderService {
 
          // orders.payment_status = Pending
          savedOrder.setPaymentStatus(
-                 PaymentStatus.Pending
+                 PaymentStatus.Paid
          );
      }
 
@@ -645,8 +668,107 @@ public class OrderService {
         return orderRepository.save(order);
     }
     
+ // ====================================================
+    // ADMIN - GET ALL ORDERS
+    // ====================================================
+
+    public List<OrderResponse> getAllOrders() {
+
+        List<Order> orders = orderRepository.findAll();
+
+        return orders.stream()
+                .map(this::convertToResponse)
+                .collect(Collectors.toList());
+    }
+    
+    public long getOrderCount() {
+        return orderRepository.count();
+    }
 
     
 
+    private OrderResponse convertToResponse(Order order) {
 
+        OrderResponse response = new OrderResponse();
+
+        response.setOrderId(order.getOrderId());
+        response.setCustomerId(order.getCustomerId());
+        response.setOrderDate(order.getOrderDate());
+        response.setTotalAmount(order.getTotalAmount());
+
+        response.setOrderStatus(
+                order.getOrderStatus() != null
+                        ? order.getOrderStatus().name()
+                        : ""
+        );
+
+        response.setPaymentStatus(
+                order.getPaymentStatus() != null
+                        ? order.getPaymentStatus().name()
+                        : ""
+        );
+
+        return response;
+    }
+    
+    private void addSoldStock(Integer productId, Integer quantity) {
+
+        Map<String, Object> request = new java.util.HashMap<>();
+
+        request.put("productId", productId);
+        request.put("soldQty", quantity);
+
+        restClientBuilder
+                .build()
+                .post()
+                .uri("http://PRODUCTSERVICE/sold")
+                .body(request)
+                .retrieve()
+                .toBodilessEntity();
+    }
+    
+    private void checkStock(Integer productId, Integer requestedQuantity) {
+
+        Map<String, Object> stockResponse = restClientBuilder
+                .build()
+                .get()
+                .uri(
+                        "http://PRODUCTSERVICE/inventory/available/{productId}",
+                        productId
+                )
+                .retrieve()
+                .body(new org.springframework.core.ParameterizedTypeReference<Map<String, Object>>() {});
+
+        if (stockResponse == null) {
+            throw new RuntimeException(
+                    "Unable to check stock for product: " + productId
+            );
+        }
+
+        Number availableStockNumber =
+                (Number) stockResponse.get("availableStock");
+
+        if (availableStockNumber == null) {
+            throw new RuntimeException(
+                    "Available stock not found for product: " + productId
+            );
+        }
+
+        int availableStock = availableStockNumber.intValue();
+
+        if (requestedQuantity > availableStock) {
+
+            throw new InsufficientStockException(
+                    "Insufficient stock for product "
+                    + productId
+                    + ". Available: "
+                    + availableStock
+                    + ", Requested: "
+                    + requestedQuantity
+            );
+        }
+    }
 }
+    
+
+  

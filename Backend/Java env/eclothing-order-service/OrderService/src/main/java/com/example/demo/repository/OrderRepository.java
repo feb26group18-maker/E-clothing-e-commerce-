@@ -11,5 +11,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByCustomerId(Integer customerId);
     
     List<Order> findByOrderIdIn(List<Integer> orderIds);
+    
+    long count();
 
 }
