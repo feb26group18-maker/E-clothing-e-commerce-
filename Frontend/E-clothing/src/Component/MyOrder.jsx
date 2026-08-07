@@ -350,9 +350,20 @@ export default function MyOrder() {
 
                                 <div>
 
-                                    <h3>
+                                    {/* <h3>
                                         Order #{order.orderId}
-                                    </h3>
+                                    </h3> */}
+                                     <span
+                                    className={`status ${order.orderStatus ===
+                                            "Delivered"
+                                            ? "delivered"
+                                            : "pending"
+                                        }`}
+                                >
+
+                                    {order.orderStatus}
+
+                                </span>
 
 
                                     <p>
@@ -366,17 +377,7 @@ export default function MyOrder() {
                                 </div>
 
 
-                                <span
-                                    className={`status ${order.orderStatus ===
-                                            "Delivered"
-                                            ? "delivered"
-                                            : "pending"
-                                        }`}
-                                >
-
-                                    {order.orderStatus}
-
-                                </span>
+                               
 
                             </div>
 
@@ -408,7 +409,7 @@ export default function MyOrder() {
 
                                 {/* Customer */}
 
-                                <div>
+                                {/* <div>
 
                                     <label>
                                         Customer ID
@@ -418,7 +419,7 @@ export default function MyOrder() {
                                         {order.customerId}
                                     </span>
 
-                                </div>
+                                </div> */}
 
 
                                 {/* Total */}

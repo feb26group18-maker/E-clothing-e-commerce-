@@ -26,7 +26,8 @@ export default function AdminDashboard() {
           <NavLink to="sellers">Sellers</NavLink>
           <NavLink to="customers">Customers</NavLink>
           <NavLink to="products">Products</NavLink>
-          <NavLink to="categories">Category</NavLink>
+          <NavLink to="category">Category</NavLink>
+          <NavLink to="subcategory">SubCategory</NavLink>
           <NavLink to="orders">Orders</NavLink>
           {/* <NavLink to="reports">Reports</NavLink> */}
 

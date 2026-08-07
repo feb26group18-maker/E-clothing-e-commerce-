@@ -16,6 +16,7 @@ export const deleteProduct = async (productId) => {
     return await axios.delete(`${BASE_URL}/${productId}`);
 };
 
+
 // Update Product
 // export const updateProduct = async (
 //     productId,
@@ -104,6 +105,14 @@ export const getProductCount = async (sellerId) => {
     return await axios.get(
         `${BASE_URL}/count/seller/${sellerId}`
     );
+};
+
+export const getProductCountt = async () => {
+
+    return await axios.get(
+        `${BASE_URL}/count`
+    );
+
 };
 
 
@@ -277,4 +286,6 @@ export const getProductsByPriceRange = async(
     return await response.json();
 
 };
+
+
 

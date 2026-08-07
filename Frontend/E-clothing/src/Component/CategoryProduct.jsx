@@ -252,6 +252,8 @@
 
 import { useEffect, useState } from "react";
 import "./CategoryProduct.css";
+import Navbar from "./Navbar";
+
 import {
     addToWishlist,
     getWishlist,
@@ -659,7 +661,8 @@ const handleWishlist = async (productId) => {
 return (
 
 <div className="category-page">
-
+    <>
+        <Navbar />
 
     {/* Banner */}
 
@@ -689,7 +692,7 @@ return (
 
     </div>
 
-
+   </>
 
 
 

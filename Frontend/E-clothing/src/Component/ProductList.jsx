@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "./Breadcrumb";
 import "./ProductList.css";
@@ -6,23 +6,86 @@ import "./ProductList.css";
 export default function ProductList() {
   const navigate = useNavigate();
 
-  const [products, setProducts] = useState([
-    { id: 1, name: "Nike Air Max", category: "Shoes", price: "₹4999", status: "Pending" },
-    { id: 2, name: "Puma T-Shirt", category: "Clothing", price: "₹1299", status: "Approved" },
-    { id: 3, name: "Adidas Jacket", category: "Clothing", price: "₹2999", status: "Rejected" },
-  ]);
+  const [products, setProducts] = useState([]);
 
-  const updateStatus = (id, status) => {
-    setProducts(products.map((p) => (p.id === id ? { ...p, status } : p)));
+  // Load all products
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
+  const loadProducts = () => {
+    fetch("http://localhost:8080/products")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+      })
+      .catch((err) => console.error("Error loading products:", err));
   };
 
-  const deleteProduct = (id) => {
-    setProducts(products.filter((p) => p.id !== id));
+  // Approve Product
+  const approveProduct = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/products/${id}/approve`,
+        {
+          method: "PUT",
+        }
+      );
+
+      if (response.ok) {
+        loadProducts();
+      } else {
+        alert("Failed to approve product");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Reject Product
+  const rejectProduct = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/products/${id}/reject`,
+        {
+          method: "PUT",
+        }
+      );
+
+      if (response.ok) {
+        loadProducts();
+      } else {
+        alert("Failed to reject product");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Delete Product
+  const deleteProduct = async (id) => {
+    if (!window.confirm("Delete this product?")) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/products/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        loadProducts();
+      } else {
+        alert("Failed to delete product");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <div className="product-page">
-
       <Breadcrumb
         items={[
           { label: "Admin", path: "/admin" },
@@ -32,90 +95,104 @@ export default function ProductList() {
       />
 
       <div className="product-card">
-
         <table className="product-table">
-
           <thead>
             <tr>
               <th>ID</th>
               <th>Product</th>
+              <th>Seller</th>
               <th>Category</th>
+              <th>Sub Category</th>
+              <th>Size</th>
               <th>Price</th>
-              <th>Status</th>
+              {/* <th>Status</th> */}
               <th>Actions</th>
             </tr>
           </thead>
 
           <tbody>
             {products.map((product) => (
-              <tr key={product.id}>
-
-                <td>#{product.id}</td>
+              <tr key={product.productId}>
+                <td>#{product.productId}</td>
 
                 <td>
                   <div className="name-cell">
                     <div className="avatar">
-                      {product.name.charAt(0)}
+                      {product.productName?.charAt(0)}
                     </div>
-                    {product.name}
+
+                    {product.productName}
                   </div>
                 </td>
 
-                <td>{product.category}</td>
-                <td>{product.price}</td>
+                <td>{product.sellerName}</td>
 
-                <td>
-                  <span className={`status-badge ${product.status.toLowerCase()}`}>
-                    {product.status}
+                <td>{product.categoryName}</td>
+
+                <td>{product.subCategoryName}</td>
+
+                <td>{product.size}</td>
+
+                <td>₹{product.price}</td>
+
+                {/* <td>
+                  <span
+                    className={`status-badge ${product.approvalStatus.toLowerCase()}`}
+                  >
+                    {product.approvalStatus}
                   </span>
-                </td>
+                </td> */}
 
                 <td>
                   <div className="action-buttons">
-
-                    <button
+                    {/* <button
                       className="view-btn"
-                      onClick={() => navigate(`/admin/products/${product.id}`)}
+                      onClick={() =>
+                        navigate(`/admin/products/${product.productId}`)
+                      }
                     >
                       View
-                    </button>
-
-                    {product.status !== "Approved" && (
+                    </button> */}
+{/* 
+                    {product.approvalStatus !== "Approved" && (
                       <button
                         className="approve-btn"
-                        onClick={() => updateStatus(product.id, "Approved")}
+                        onClick={() => approveProduct(product.productId)}
                       >
                         Approve
                       </button>
-                    )}
+                    )} */}
 
-                    {product.status !== "Rejected" && (
+                    {/* {product.approvalStatus !== "Rejected" && (
                       <button
                         className="reject-btn"
-                        onClick={() => updateStatus(product.id, "Rejected")}
+                        onClick={() => rejectProduct(product.productId)}
                       >
                         Reject
                       </button>
-                    )}
+                    )} */}
 
                     <button
                       className="delete-btn"
-                      onClick={() => deleteProduct(product.id)}
+                      onClick={() => deleteProduct(product.productId)}
                     >
                       Delete
                     </button>
-
                   </div>
                 </td>
-
               </tr>
             ))}
+
+            {products.length === 0 && (
+              <tr>
+                <td colSpan="9" style={{ textAlign: "center" }}>
+                  No Products Found
+                </td>
+              </tr>
+            )}
           </tbody>
-
         </table>
-
       </div>
-
     </div>
   );
 }

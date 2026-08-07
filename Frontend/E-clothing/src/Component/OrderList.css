@@ -1,0 +1,181 @@
+.order-page {
+  padding: 25px;
+  background: #f6f7fb;
+}
+
+/* CARD */
+.order-card {
+  background: white;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  overflow-x: auto;
+}
+
+/* TABLE */
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+/* HEADER */
+.order-table thead {
+  background: #f8fafc;
+}
+
+.order-table th {
+  text-align: left;
+  padding: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+}
+
+/* ROW */
+.order-table td {
+  padding: 14px;
+  font-size: 13px;
+  color: #334155;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.order-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* CUSTOMER CELL */
+.customer-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+/* AVATAR */
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* STATUS BADGES */
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+/* Pending */
+.status-badge.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* Confirmed */
+.status-badge.confirmed {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* Out For Delivery */
+.status-badge.out_for_delivery {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+/* Delivered */
+.status-badge.delivered {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* Cancelled */
+.status-badge.cancelled {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Returned */
+.status-badge.returned {
+  background: #f3f4f6;
+  color: #475569;
+}
+
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* BUTTON */
+.action-buttons button {
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: 0.2s;
+}
+
+/* VIEW */
+.view-btn {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  color: white;
+}
+
+/* UPDATE */
+.update-btn {
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+  color: white;
+}
+
+/* DELETE */
+.delete-btn {
+  background: linear-gradient(135deg, #ef4444, #f87171);
+  color: white;
+}
+
+.view-btn:hover,
+.update-btn:hover,
+.delete-btn:hover {
+  opacity: 0.9;
+}
+
+.action-buttons button:active {
+  transform: scale(0.96);
+}
+
+/* ORDER ID */
+.order-id {
+  font-weight: 700;
+  color: #2563eb;
+}
+
+/* PRICE */
+.order-price {
+  font-weight: 700;
+  color: #16a34a;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .order-card {
+    overflow-x: auto;
+  }
+
+  .order-table {
+    min-width: 850px;
+  }
+}

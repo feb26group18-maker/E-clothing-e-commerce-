@@ -105,22 +105,28 @@ export default function SellerHome() {
 
     try {
 
+      // const sellerId = user?.sellerId;
+
+      // if (!sellerId) {
+      //   console.log("Seller ID not found");
+      //   return;
+      // }
+
+
+      // // ==========================================
+      // // 1. TOTAL PRODUCTS
+      // // ==========================================
+
+      // const productResponse =
+      //   await getProductCount(sellerId);
+
+      // setTotalProducts(productResponse.data);
       const sellerId = user?.sellerId;
 
-      if (!sellerId) {
-        console.log("Seller ID not found");
-        return;
-      }
+const productResponse =
+    await getProductCount(sellerId);
 
-
-      // ==========================================
-      // 1. TOTAL PRODUCTS
-      // ==========================================
-
-      const productResponse =
-        await getProductCount(sellerId);
-
-      setTotalProducts(productResponse.data);
+setTotalProducts(productResponse.data);
 
 
       // ==========================================
@@ -208,7 +214,7 @@ export default function SellerHome() {
 
         <h2>
 
-          Welcome Back{" "}
+          Welcome{" "}
 
           <span className="seller-name">
 
@@ -227,7 +233,7 @@ export default function SellerHome() {
 
         </p>
 
-      </div>
+      </div><br></br>
 
 
       {/* ==========================================

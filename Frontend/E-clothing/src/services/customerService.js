@@ -1,4 +1,20 @@
+import axios from "axios";
+
 const USER_API = "http://localhost:8080/users";
+const BASE_URL = "http://localhost:8080/customers";
+
+const getAuthHeaders = () => {
+
+    const user = JSON.parse(
+        localStorage.getItem("user")
+    );
+
+    return {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${user?.token}`
+    };
+};
+
 
 // ======================================
 // GET CUSTOMER PROFILE
@@ -76,4 +92,32 @@ export const getCustomerProfile = async (customerId) => {
     );
 
     return data;
+};
+
+
+// Get All Customers
+export const getCustomers = () => {
+
+    return axios.get(BASE_URL, {
+        headers: getAuthHeaders()
+    });
+
+};
+
+// Delete Customer
+export const deleteCustomer = (userId) => {
+
+    return axios.delete(`${BASE_URL}/${userId}`, {
+        headers: getAuthHeaders()
+    });
+
+};
+
+// Get Total Active Customer Count
+export const getCustomerCount = () => {
+
+    return axios.get(`${BASE_URL}/count`, {
+        headers: getAuthHeaders()
+    });
+
 };

@@ -42,6 +42,14 @@ import Address from './Component/Address'
 import Payment from './Component/Payment'
 import MyOrder from './Component/MyOrder'
 import CustomerOrderDetails from './Component/CustomerOrderDetails'
+import OrderList from './Component/OrderList'
+import CategoryList from './Component/CategoryList'
+import AddCategory from './Component/AddCategory'
+import EditCategory from './Component/EditCategory'
+import SubCategoryList from './Component/SubCategoryList'
+import AddSubCategory from './Component/AddSubCategory'
+import EditSubCategory from './Component/EditSubCategory'
+import AddInventory from './Component/AddInventory'
 
 
 
@@ -128,26 +136,26 @@ function App() {
           <Route path="/logout" element={<Logout />} />
 
           <Route path="men" element={<Men />} />
-            <Route path="women" element={<Women />} />
-            <Route path="kids" element={<Kids />} />
-            <Route path="cart" element={<Cart />} />
-               <Route
-        path="/customer/address"
-        element={<Address />}
-    />
-    <Route
-        path="/customer/payment"
-        element={<Payment />}
-    />
-    <Route
+          <Route path="women" element={<Women />} />
+          <Route path="kids" element={<Kids />} />
+          <Route path="cart" element={<Cart />} />
+          <Route
+            path="/customer/address"
+            element={<Address />}
+          />
+          <Route
+            path="/customer/payment"
+            element={<Payment />}
+          />
+          <Route
             path="/orders"
             element={<MyOrder />}
-          /> 
+          />
           <Route
-    path="/customer/order-details/:orderId"
-    element={<CustomerOrderDetails />}
-/>
-    
+            path="/customer/order-details/:orderId"
+            element={<CustomerOrderDetails />}
+          />
+
 
 
           {/* User Routes */}
@@ -188,18 +196,21 @@ function App() {
             <Route path="/seller/add-product" element={<AddProduct />} />
 
             <Route
-    path="/seller/edit-product/:productId"
-    element={<EditProduct />}
-/>
+              path="/seller/edit-product/:productId"
+              element={<EditProduct />}
+            />
 
             <Route path="/seller/edit-profile/:id" element={<EditSellerProfile />} />
-   
+
             <Route path="inventory" element={<ManageInventory />} />
             <Route path="orders" element={<SellerOrders />} />
             <Route path="orders/:id" element={<OrderDetails />} />
             <Route path="salesreport" element={<SalesReport />} />
 
-
+<Route
+    path="/seller/inventory/add"
+    element={<AddInventory />}
+/>
           </Route>
 
 
@@ -217,6 +228,19 @@ function App() {
             <Route path="customers" element={<CustomerList />} />
             <Route path="customers/:id" element={<CustomerView />} />
             <Route path="products" element={<ProductList />} />
+            <Route path="orders" element={<OrderList />} />
+            <Route path="category" element={<CategoryList />} />
+            <Route path="category/add" element={<AddCategory />} />
+            <Route path="category/edit/:id" element={<EditCategory />} />
+            <Route path="subcategory" element={<SubCategoryList />} />
+
+            <Route path="subcategory/add" element={<AddSubCategory />} />
+            <Route path="subcategory/edit/:id" element={<EditSubCategory />} />
+
+
+
+
+
 
           </Route>
         </Routes>

@@ -1,5 +1,46 @@
-
+import axios from "axios";
 const API_URL = "http://localhost:8080/orders";
+
+
+// export const placeOrder = async (orderData) => {
+
+//     const token = localStorage.getItem("token");
+
+//     if (!token) {
+//         throw new Error("JWT token not found");
+//     }
+
+//     const response = await fetch(
+//         `${API_URL}/place`,
+//         {
+//             method: "POST",
+
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization": `Bearer ${token}`
+//             },
+
+//             body: JSON.stringify(orderData)
+//         }
+//     );
+
+//     if (!response.ok) {
+
+//         const errorText = await response.text();
+
+//         console.log(
+//             "Place Order Error:",
+//             errorText
+//         );
+
+//         throw new Error(
+//             errorText || "Failed to place order"
+//         );
+//     }
+
+//     return await response.json();
+// };
+
 
 export const placeOrder = async (orderData) => {
 
@@ -25,16 +66,30 @@ export const placeOrder = async (orderData) => {
 
     if (!response.ok) {
 
-        const errorText = await response.text();
+        let errorMessage = "Failed to place order";
 
-        console.log(
-            "Place Order Error:",
-            errorText
-        );
+        try {
 
-        throw new Error(
-            errorText || "Failed to place order"
-        );
+            const errorData = await response.json();
+
+            errorMessage =
+                errorData.message ||
+                errorMessage;
+
+        } catch (error) {
+
+            console.log(
+                "Error response could not be parsed:",
+                error
+            );
+
+        }
+
+        const customError = new Error(errorMessage);
+
+        customError.status = response.status;
+
+        throw customError;
     }
 
     return await response.json();
@@ -127,3 +182,12 @@ export const getPaymentByOrderId = async (orderId) => {
     return await response.json();
 };
 
+
+
+export const getAllOrders = async () => {
+    return await axios.get(API_URL);
+};
+
+export const getOrderCount = async () => {
+    return await axios.get(`${API_URL}/count`);
+};

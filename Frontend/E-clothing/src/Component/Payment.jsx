@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Payment.css";
 import { placeOrder } from "../services/orderService";
-import { clearCart } from "../services/cartService";
+// import { clearCart } from "../services/cartService";
 
 export default function Payment() {
 
@@ -153,54 +153,54 @@ export default function Payment() {
             // Card validation
             // -----------------------------------
 
-            
-if (
-    paymentMethod === "Credit_Card" ||
-    paymentMethod === "Debit_Card"
-) {
 
-    if (!paymentDetails.cardHolderName.trim()) {
+            if (
+                paymentMethod === "Credit_Card" ||
+                paymentMethod === "Debit_Card"
+            ) {
 
-        alert("Please enter card holder name.");
+                if (!paymentDetails.cardHolderName.trim()) {
 
-        return;
-    }
+                    alert("Please enter card holder name.");
 
-    if (!paymentDetails.cardNumber.trim()) {
+                    return;
+                }
 
-        alert("Please enter card number.");
+                if (!paymentDetails.cardNumber.trim()) {
 
-        return;
-    }
+                    alert("Please enter card number.");
 
-    if (paymentDetails.cardNumber.length !== 16) {
+                    return;
+                }
 
-        alert("Card number must be 16 digits.");
+                if (paymentDetails.cardNumber.length !== 16) {
 
-        return;
-    }
+                    alert("Card number must be 16 digits.");
 
-    if (!paymentDetails.expiry.trim()) {
+                    return;
+                }
 
-        alert("Please enter expiry date.");
+                if (!paymentDetails.expiry.trim()) {
 
-        return;
-    }
+                    alert("Please enter expiry date.");
 
-    if (!paymentDetails.cvv.trim()) {
+                    return;
+                }
 
-        alert("Please enter CVV.");
+                if (!paymentDetails.cvv.trim()) {
 
-        return;
-    }
+                    alert("Please enter CVV.");
 
-    if (paymentDetails.cvv.length !== 3) {
+                    return;
+                }
 
-        alert("CVV must be 3 digits.");
+                if (paymentDetails.cvv.length !== 3) {
 
-        return;
-    }
-}
+                    alert("CVV must be 3 digits.");
+
+                    return;
+                }
+            }
 
 
 
@@ -266,9 +266,9 @@ if (
             // Clear backend cart
             // -----------------------------------
 
-            await clearCart(user.customerId);
+            // await clearCart(user.customerId);
 
-            console.log("Backend cart cleared successfully");
+            // console.log("Backend cart cleared successfully");
 
 
             // -----------------------------------
@@ -310,18 +310,49 @@ if (
             navigate("/");
 
 
-        } catch (error) {
+        }
+        // catch (error) {
+
+        //     console.error(
+        //         "Order placement error:",
+        //         error
+        //     );
+
+        //     alert(
+        //         "Failed to place order. Please try again."
+        //     );
+
+        // }
+        catch (error) {
 
             console.error(
                 "Order placement error:",
                 error
             );
 
+            // ----------------------------------------
+            // Insufficient Stock
+            // ----------------------------------------
+
+            if (error.status === 409) {
+
+                alert(
+                    error.message
+                );
+
+                return;
+            }
+
+            // ----------------------------------------
+            // Other Errors
+            // ----------------------------------------
+
             alert(
+                error.message ||
                 "Failed to place order. Please try again."
             );
-
         }
+
 
     };
 

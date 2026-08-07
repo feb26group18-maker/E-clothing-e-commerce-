@@ -638,6 +638,7 @@
 import { useEffect, useState } from "react";
 import "./Wishlist.css";
 import Size from "./Size";
+import Navbar from "./Navbar";
 
 import {
     getWishlist,
@@ -909,7 +910,8 @@ setSelectedProduct(null);
 
 };
     return (
-
+        <>
+        <Navbar />
         <div className="wishlist-page">
 
             {/* Header */}
@@ -1070,7 +1072,7 @@ setSelectedProduct(null);
                 showSizePopup && (
 
                     <Size
-
+                        product={selectedProduct}
                         onClose={() => {
 
                             setShowSizePopup(false);
@@ -1087,6 +1089,6 @@ setSelectedProduct(null);
             }
 
         </div>
-
+ </>
     );
 }

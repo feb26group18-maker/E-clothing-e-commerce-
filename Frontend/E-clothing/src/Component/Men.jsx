@@ -96,6 +96,7 @@ import { useEffect, useState } from "react";
 
 import CategoryProduct from "./CategoryProduct";
 
+
 export default function Men() {
     return (
         <CategoryProduct

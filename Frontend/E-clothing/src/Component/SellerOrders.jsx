@@ -248,13 +248,24 @@ export default function SellerOrders() {
 const markAsDelivered = async (orderId) => {
 
   try {
+    const token = localStorage.getItem("token");
 
-    const response = await fetch(
-      `http://localhost:8080/orders/${orderId}/deliver`,
-      {
-        method: "PUT"
-      }
-    );
+const response = await fetch(
+    `http://localhost:8080/orders/${orderId}/deliver`,
+    {
+        method: "PUT",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+);
+
+    // const response = await fetch(
+    //   `http://localhost:8080/orders/${orderId}/deliver`,
+    //   {
+    //     method: "PUT"
+    //   }
+    // );
 
     if (!response.ok) {
       throw new Error("Failed to update order status");

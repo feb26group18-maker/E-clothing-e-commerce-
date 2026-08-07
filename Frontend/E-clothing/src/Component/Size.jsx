@@ -1,304 +1,8 @@
-// // // import { useState } from "react";
-// // // import "./Size.css";
-
-// // // export default function Size({
-
-// // //     product,
-
-// // //     onClose,
-
-// // //     onAddToCart
-
-// // // }) {
-
-// // //     const [selectedSize, setSelectedSize] = useState("");
-
-// // //     const [qty, setQty] = useState(1);
-
-// // //     const sizes = ["S", "M", "L", "XL", "XXL"];
-
-// // //     const handleAdd = () => {
-
-// // //         if (!selectedSize) {
-
-// // //             alert("Please select a size.");
-
-// // //             return;
-
-// // //         }
-
-// // //         onAddToCart({
-
-// // //             ...product,
-
-// // //             size: selectedSize,
-
-// // //             qty: qty
-
-// // //         });
-
-// // //         onClose();
-
-// // //     };
-
-// // //     return (
-
-// // //         <div className="size-overlay">
-
-// // //             <div className="size-modal">
-
-// // //                 <h2>Select Size</h2>
-
-// // //                 <img
-// // //                     src={product.image}
-// // //                     alt={product.name}
-// // //                     className="size-product-image"
-// // //                 />
-
-// // //                 <h3>{product.brand}</h3>
-
-// // //                 <p>{product.name}</p>
-
-// // //                 <h4>₹{product.price}</h4>
-
-// // //                 <div className="size-buttons">
-
-// // //                     {sizes.map(size => (
-
-// // //                         <button
-
-// // //                             key={size}
-
-// // //                             className={
-// // //                                 selectedSize === size
-// // //                                     ? "active-size"
-// // //                                     : ""
-// // //                             }
-
-// // //                             onClick={() =>
-// // //                                 setSelectedSize(size)
-// // //                             }
-
-// // //                         >
-
-// // //                             {size}
-
-// // //                         </button>
-
-// // //                     ))}
-
-// // //                 </div>
-
-// // //                 <div className="qty-box">
-
-// // //                     <button
-// // //                         onClick={() =>
-// // //                             qty > 1 &&
-// // //                             setQty(qty - 1)
-// // //                         }
-// // //                     >
-// // //                         -
-// // //                     </button>
-
-// // //                     <span>{qty}</span>
-
-// // //                     <button
-// // //                         onClick={() =>
-// // //                             setQty(qty + 1)
-// // //                         }
-// // //                     >
-// // //                         +
-// // //                     </button>
-
-// // //                 </div>
-
-// // //                 <div className="size-actions">
-
-// // //                     <button
-// // //                         className="cancel-btn"
-// // //                         onClick={onClose}
-// // //                     >
-// // //                         Cancel
-// // //                     </button>
-
-// // //                     <button
-// // //                         className="cart-btn"
-// // //                         onClick={handleAdd}
-// // //                     >
-// // //                         Add To Cart
-// // //                     </button>
-
-// // //                 </div>
-
-// // //             </div>
-
-// // //         </div>
-
-// // //     );
-
-// // // }
-
-
-// // import { useState } from "react";
-// // import "./Size.css";
-
-// // export default function Size({
-
-// //     product,
-
-// //     onClose,
-
-// //     onAddToCart
-
-// // }) {
-
-// //     const [selectedSize, setSelectedSize] = useState("");
-
-// //     const [qty, setQty] = useState(1);
-
-// //     const sizes = ["S", "M", "L", "XL", "XXL"];
-
-
-// //     const handleAdd = () => {
-
-// //         if (!selectedSize) {
-
-// //             alert("Please Select Size");
-
-// //             return;
-
-// //         }
-
-// //         onAddToCart({
-
-// //             ...product,
-
-// //             size: selectedSize,
-
-// //             qty: qty
-
-// //         });
-
-// //     };
-
-
-// //     return (
-
-// //         <div className="size-overlay">
-
-// //             <div className="size-modal">
-
-// //                 <button
-// //                     className="close-size"
-// //                     onClick={onClose}
-// //                 >
-// //                     ✕
-// //                 </button>
-
-// //                 <img
-// //                     src={product.imageUrl || product.image}
-// //                     alt={product.productName || product.name}
-// //                     className="size-product-image"
-// //                 />
-
-// //                 <h3>
-// //                     {product.categoryName || product.brand}
-// //                 </h3>
-
-// //                 <p>
-// //                     {product.productName || product.name}
-// //                 </p>
-
-// //                 <h2>
-// //                     ₹{product.price}
-// //                 </h2>
-
-// //                 <h4>Select Size</h4>
-
-// //                 <div className="size-buttons">
-
-// //                     {sizes.map((size) => (
-
-// //                         <button
-
-// //                             key={size}
-
-// //                             className={
-// //                                 selectedSize === size
-// //                                     ? "active-size"
-// //                                     : ""
-// //                             }
-
-// //                             onClick={() =>
-// //                                 setSelectedSize(size)
-// //                             }
-
-// //                         >
-// //                             {size}
-// //                         </button>
-
-// //                     ))}
-
-// //                 </div>
-
-// //                 <h4>Quantity</h4>
-
-// //                 <div className="qty-box">
-
-// //                     <button
-// //                         onClick={() =>
-// //                             qty > 1 &&
-// //                             setQty(qty - 1)
-// //                         }
-// //                     >
-// //                         -
-// //                     </button>
-
-// //                     <span>{qty}</span>
-
-// //                     <button
-// //                         onClick={() =>
-// //                             setQty(qty + 1)
-// //                         }
-// //                     >
-// //                         +
-// //                     </button>
-
-// //                 </div>
-
-// //                 <div className="size-actions">
-
-// //                     <button
-// //                         className="cancel-btn"
-// //                         onClick={onClose}
-// //                     >
-// //                         Cancel
-// //                     </button>
-
-// //                     <button
-// //                         className="cart-btn"
-// //                         onClick={handleAdd}
-// //                     >
-// //                         Add To Cart
-// //                     </button>
-
-// //                 </div>
-
-// //             </div>
-
-// //         </div>
-
-// //     );
-
-// // }
-
-
-
 // import { useState } from "react";
 // import "./Size.css";
 
 // export default function Size({
-
+//     product,
 //     onClose,
 
 //     onAddToCart
@@ -309,13 +13,14 @@
 
 //     const [qty, setQty] = useState(1);
 
-//     const sizes = ["S", "M", "L", "XL", "XXL"];
+//     // const sizes = ["S", "M", "L", "XL", "XXL"];
+//     const availableSize = product?.size;
 
 //     const handleAdd = () => {
 
 //         if (!selectedSize) {
 
-//             alert("Please select size");
+//             alert("Please select a size.");
 
 //             return;
 
@@ -329,8 +34,6 @@
 
 //         });
 
-//         onClose();
-
 //     };
 
 //     return (
@@ -339,22 +42,41 @@
 
 //             <div className="size-modal">
 
-//                 <h2>Select Size</h2>
+//                 <button
+//                     className="close-btn"
+//                     onClick={onClose}
+//                 >
+//                     ×
+//                 </button>
+
+//                 <h2>
+
+//                     Select Size
+
+//                 </h2>
 
 //                 <div className="size-buttons">
 
-//                     {
+//                     {/* {
 
-//                         sizes.map((size) => (
+//                         sizes.map(size => (
 
 //                             <button
 
 //                                 key={size}
 
 //                                 className={
+
 //                                     selectedSize === size
-//                                         ? "active-size"
-//                                         : ""
+
+//                                         ?
+
+//                                         "active-size"
+
+//                                         :
+
+//                                         ""
+
 //                                 }
 
 //                                 onClick={() =>
@@ -369,11 +91,24 @@
 
 //                         ))
 
-//                     }
+//                     } */}
+//                     {availableSize && (
+//     <button
+//         type="button"
+//         className={
+//             selectedSize === availableSize
+//                 ? "active-size"
+//                 : ""
+//         }
+//         onClick={() => setSelectedSize(availableSize)}
+//     >
+//         {availableSize}
+//     </button>
+// )}
 
 //                 </div>
 
-//                 <h3 className="qty-title">
+//                 <h3>
 
 //                     Quantity
 
@@ -384,13 +119,16 @@
 //                     <button
 
 //                         onClick={() =>
+
 //                             qty > 1 &&
+
 //                             setQty(qty - 1)
+
 //                         }
 
 //                     >
 
-//                         -
+//                         −
 
 //                     </button>
 
@@ -450,22 +188,124 @@
 
 // }
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Size.css";
 
+import { getAvailableStock } from "../services/inventoryService";
+
 export default function Size({
-
+    product,
     onClose,
-
     onAddToCart
-
 }) {
 
     const [selectedSize, setSelectedSize] = useState("");
 
     const [qty, setQty] = useState(1);
 
-    const sizes = ["S", "M", "L", "XL", "XXL"];
+    const [availableStock, setAvailableStock] = useState(0);
+
+    const [loadingStock, setLoadingStock] = useState(true);
+
+
+    // --------------------------------------------------
+    // Load Available Stock
+    // --------------------------------------------------
+
+    useEffect(() => {
+
+        const loadStock = async () => {
+
+            try {
+
+                setLoadingStock(true);
+
+                const data =
+                    await getAvailableStock(
+                        product.productId
+                    );
+
+                console.log(
+                    "Available Stock:",
+                    data
+                );
+
+                setAvailableStock(
+                    data.availableStock
+                );
+
+            } catch (error) {
+
+                console.log(
+                    "Stock loading error:",
+                    error
+                );
+
+                setAvailableStock(0);
+
+            } finally {
+
+                setLoadingStock(false);
+
+            }
+
+        };
+
+        if (product?.productId) {
+
+            loadStock();
+
+        }
+
+    }, [product]);
+
+
+    // --------------------------------------------------
+    // Select Size
+    // --------------------------------------------------
+
+    const availableSize = product?.size;
+
+
+    // --------------------------------------------------
+    // Increase Quantity
+    // --------------------------------------------------
+
+    const increaseQty = () => {
+
+        if (qty >= availableStock) {
+
+            alert(
+                `Only ${availableStock} quantity available.`
+            );
+
+            return;
+
+        }
+
+        setQty(qty + 1);
+
+    };
+
+
+    // --------------------------------------------------
+    // Decrease Quantity
+    // --------------------------------------------------
+
+    const decreaseQty = () => {
+
+        if (qty > 1) {
+
+            setQty(qty - 1);
+
+        }
+
+    };
+
+
+    // --------------------------------------------------
+    // Add To Cart
+    // --------------------------------------------------
 
     const handleAdd = () => {
 
@@ -477,6 +317,27 @@ export default function Size({
 
         }
 
+
+        if (availableStock <= 0) {
+
+            alert("Product is Out of Stock.");
+
+            return;
+
+        }
+
+
+        if (qty > availableStock) {
+
+            alert(
+                `Only ${availableStock} quantity available.`
+            );
+
+            return;
+
+        }
+
+
         onAddToCart({
 
             size: selectedSize,
@@ -487,11 +348,15 @@ export default function Size({
 
     };
 
+
     return (
 
         <div className="size-overlay">
 
             <div className="size-modal">
+
+
+                {/* Close */}
 
                 <button
                     className="close-btn"
@@ -500,123 +365,160 @@ export default function Size({
                     ×
                 </button>
 
+
                 <h2>
-
                     Select Size
-
                 </h2>
+
+
+                {/* Product Information */}
+
+                <div className="size-product-info">
+
+                    <h3>
+                        {product?.productName}
+                    </h3>
+
+                    <p>
+                        ₹{product?.price}
+                    </p>
+
+                </div>
+
+
+                {/* -------------------------------- */}
+                {/* SIZE */}
+                {/* -------------------------------- */}
 
                 <div className="size-buttons">
 
-                    {
+                    {availableSize && (
 
-                        sizes.map(size => (
+                        <button
+                            type="button"
+                            className={
+                                selectedSize === availableSize
+                                    ? "active-size"
+                                    : ""
+                            }
+                            onClick={() =>
+                                setSelectedSize(
+                                    availableSize
+                                )
+                            }
+                        >
+                            {availableSize}
+                        </button>
 
-                            <button
-
-                                key={size}
-
-                                className={
-
-                                    selectedSize === size
-
-                                        ?
-
-                                        "active-size"
-
-                                        :
-
-                                        ""
-
-                                }
-
-                                onClick={() =>
-                                    setSelectedSize(size)
-                                }
-
-                            >
-
-                                {size}
-
-                            </button>
-
-                        ))
-
-                    }
+                    )}
 
                 </div>
 
+
+                {/* -------------------------------- */}
+                {/* STOCK */}
+                {/* -------------------------------- */}
+
+                {loadingStock ? (
+
+                    <p>
+                        Checking stock...
+                    </p>
+
+                ) : availableStock > 0 ? (
+
+                    <p className="stock-message">
+
+                        {availableStock} items available
+
+                    </p>
+
+                ) : (
+
+                    <p className="out-stock-message">
+
+                        Out of Stock
+
+                    </p>
+
+                )}
+
+
+                {/* -------------------------------- */}
+                {/* QUANTITY */}
+                {/* -------------------------------- */}
+
                 <h3>
-
                     Quantity
-
                 </h3>
+
 
                 <div className="qty-box">
 
+
                     <button
-
-                        onClick={() =>
-
-                            qty > 1 &&
-
-                            setQty(qty - 1)
-
-                        }
-
+                        type="button"
+                        onClick={decreaseQty}
+                        disabled={qty <= 1}
                     >
-
                         −
-
                     </button>
+
 
                     <span>
-
                         {qty}
-
                     </span>
 
+
                     <button
-
-                        onClick={() =>
-                            setQty(qty + 1)
+                        type="button"
+                        onClick={increaseQty}
+                        disabled={
+                            loadingStock ||
+                            availableStock <= 0 ||
+                            qty >= availableStock
                         }
-
                     >
-
                         +
-
                     </button>
 
+
                 </div>
+
+
+                {/* -------------------------------- */}
+                {/* ACTION BUTTONS */}
+                {/* -------------------------------- */}
 
                 <div className="size-actions">
 
-                    <button
 
+                    <button
                         className="cancel-btn"
-
                         onClick={onClose}
-
                     >
-
                         Cancel
-
                     </button>
+
 
                     <button
-
                         className="cart-btn"
-
                         onClick={handleAdd}
-
+                        disabled={
+                            loadingStock ||
+                            availableStock <= 0
+                        }
                     >
 
-                        Add To Cart
+                        {availableStock <= 0
+                            ? "Out of Stock"
+                            : "Add To Cart"}
 
                     </button>
+
 
                 </div>
+
 
             </div>
 

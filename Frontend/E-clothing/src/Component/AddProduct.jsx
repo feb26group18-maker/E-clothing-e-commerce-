@@ -378,6 +378,7 @@
 import { useEffect, useRef, useState } from "react";
 import Breadcrumb from "./Breadcrumb";
 import "./AddProduct.css";
+import { useNavigate } from "react-router-dom";
 
 import { addProduct } from "../services/productService";
 
@@ -389,6 +390,7 @@ import {
 
 export default function AddProduct() {
 
+    const navigate = useNavigate();
 
     const sellerId = Number(localStorage.getItem("sellerId"));
 
@@ -643,54 +645,49 @@ export default function AddProduct() {
 
             };
 
+            console.log( "Product Request:", request ); const response = await addProduct( request, images ); console.log( "Add Product Response:", response.data ); 
+            // ================================== // SUCCESS // ================================== 
+            alert( response.data || "Product added successfully!" ); 
+            // ================================== // REDIRECT TO SELLER PRODUCTS // ================================== 
+            navigate( "/seller/sellerproducts" ); } 
+            catch (error) { console.error( "Add product error:", error ); console.log( "Backend error:", error.response?.data ); alert( error.response?.data || "Failed to add product" ); } };
 
 
 
-            const response =
-                await addProduct(
-                    request,
-                    images
-                );
+    //         const response =
+    //             await addProduct(
+    //                 request,
+    //                 images
+    //             );
+
+    //         alert(response.data);
+    //         setProduct({
+
+    //             categoryId: "",
+    //             subCategoryId: "",
+    //             productName: "",
+    //             description: "",
+    //             size: "",
+    //             price: ""
+
+    //         });
+
+    //         setImages([]);
+
+    //         setSubCategories([]);
+    //     }
+    //     catch (error) {
 
 
+    //         console.log(error);
 
-            alert(response.data);
-
-
-
-
-            setProduct({
-
-                categoryId: "",
-                subCategoryId: "",
-                productName: "",
-                description: "",
-                size: "",
-                price: ""
-
-            });
+    //         alert("Failed to add product");
 
 
-
-            setImages([]);
-
-            setSubCategories([]);
+    //     }
 
 
-
-        }
-        catch (error) {
-
-
-            console.log(error);
-
-            alert("Failed to add product");
-
-
-        }
-
-
-    };
+    // };
 
     return (
 
