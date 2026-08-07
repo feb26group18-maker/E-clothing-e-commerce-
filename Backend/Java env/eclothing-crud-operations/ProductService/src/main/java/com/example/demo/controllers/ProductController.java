@@ -127,8 +127,6 @@ public class ProductController {
         }
     }
     
-    
-    
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Integer id) {
         return ResponseEntity.ok(productService.deleteProduct(id));
@@ -188,6 +186,15 @@ public class ProductController {
     @GetMapping("/count/seller/{sellerId}")
     public ResponseEntity<Long> getProductCountBySeller(@PathVariable Integer sellerId) {
         return ResponseEntity.ok(productService.getProductCountBySeller(sellerId));
+    }
+    
+    @GetMapping("/count")
+    public ResponseEntity<Long> getTotalProductCount() {
+
+        return ResponseEntity.ok(
+                productService.getTotalProductCount()
+        );
+
     }
     
     @GetMapping("/search-filter")

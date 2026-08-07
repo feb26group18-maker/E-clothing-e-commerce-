@@ -156,7 +156,7 @@ public class ProductService {
 		product.setSize(request.getSize());
 		product.setPrice(request.getPrice());
 		
-		product.setApprovalStatus(ApprovalStatus.Pending);
+		product.setApprovalStatus(ApprovalStatus.Approved);
 		product.setIsDeleted(0);
 		
 		// 3. Save Product FIRST
@@ -386,7 +386,7 @@ public class ProductService {
 
 
     // again send for admin approval
-    product.setApprovalStatus(ApprovalStatus.Pending);
+    product.setApprovalStatus(ApprovalStatus.Approved);
 
     productRepository.save(product);
     // Image update
@@ -967,6 +967,12 @@ public class ProductService {
         }
 
         return responseList;
+    }
+    
+    public Long getTotalProductCount() {
+
+        return productRepository.countByIsDeleted(0);
+
     }
     
     

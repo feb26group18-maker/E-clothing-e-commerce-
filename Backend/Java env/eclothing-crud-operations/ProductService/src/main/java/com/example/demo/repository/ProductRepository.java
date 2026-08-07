@@ -57,6 +57,6 @@ public interface ProductRepository extends JpaRepository<Product,Integer>,JpaSpe
 
     Long countBySellerIdAndIsDeleted(Integer sellerId, Integer isDeleted);
 
-    
+    Long countByIsDeleted(Integer isDeleted);
 
 }
